@@ -4,8 +4,8 @@ import AuthService from '../components/AuthForm'
 export default function LoginPage() {
   return (
     <div>
-        <PageHeader type={"register"} />
-        <AuthService type={"register"} />
+        <PageHeader action={"register"} />
+        <AuthService type="submit" action={"register"} />
       
     </div>
   )

@@ -1,14 +1,14 @@
 import LoginRegisterButton from './LoginRegisterButton'
 
-export default function AuthForm({ type }) {
+export default function AuthForm({ action }) {
   return (
     <div className="flex min-h-full flex-col justify-center px-6 lg:px-8">
       <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
             <form className="space-y-6" 
-                  action={type === "login" ? "/api/auth/login" : type === "register" ? "/api/auth/register" : ""}
+                  action={action === "login" ? "/api/auth/login" : action === "register" ? "/api/auth/register" : ""}
                   method="POST">
                     
-              {type === "register" ? 
+              {action === "register" ? 
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
                     Full Name
@@ -48,7 +48,7 @@ export default function AuthForm({ type }) {
                   <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                     Password
                   </label>
-                  {type === "login" ? 
+                  {action === "login" ? 
                       <div className="text-sm">
                         <a href="#" className="font-semibold text-orange-500 hover:text-orange-600">
                           Forgot password?
@@ -69,7 +69,7 @@ export default function AuthForm({ type }) {
                 </div>
               </div>
               
-              {type === "register" ? 
+              {action === "register" ? 
                 <div>
                   <div className="flex items-center justify-between">
                     <label htmlFor="confirm-password" className="block text-sm font-medium leading-6 text-gray-900">
@@ -80,7 +80,7 @@ export default function AuthForm({ type }) {
                     <input
                       id="confirm-password"
                       name="confirm-password"
-                      type="confirm-password"
+                      type="password"
                       required
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
@@ -90,7 +90,7 @@ export default function AuthForm({ type }) {
               }
 
               <div>
-                <LoginRegisterButton type={type} />
+                <LoginRegisterButton name={action} />
               </div>
             </form>
     </div>

@@ -4,10 +4,10 @@ import LoginRegisterButton from '../components/LoginRegisterButton'
 export default function WelcomePage() {
   return (
     <div>
-        <PageHeader type={"welcome"} />
+        <PageHeader action={"welcome"} />
         <div className="flex .flex-column w-full justify-center gap-3">
-          <LoginRegisterButton type={"login"}/>
-          <LoginRegisterButton type={"register"}/>
+          <LoginRegisterButton action={"login"}/>
+          <LoginRegisterButton action={"register"}/>
         </div>
     </div>
   )
