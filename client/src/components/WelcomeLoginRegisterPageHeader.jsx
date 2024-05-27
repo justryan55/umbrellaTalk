@@ -10,23 +10,22 @@ export default function WeclomePageHeader({type}) {
               src="./logo.svg"
               alt="Umbrella Talk"
             />
-            <h2 
-              type = {type}
-              className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
-              >
+            <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                 {type === "welcome" ? 'Welcome to Umbrella Talk' : type === "login" ? "Login to your account" : "Register for an account" }
             </h2>
-            <p 
-              type = {type}  
-              className="mt-5 text-center"
-              >
+            <p className="mt-5 text-center">
                 {type === "welcome" ? "Step into Umbrella Talk, your sanctuary for uninterrupted conversation." : type === "login" ? "Login to Umbrella Talk, your sanctuary for uninterrupted conversation." : "Register to Umbrella Talk, your sanctuary for uninterrupted conversation."}
               </p>
-              <p
-                type = {type}
-                className="mt-2 text-center text-sm text-gray-500"
-              >
-                {type === "welcome" ? '' : type === "login" ? <Link to="/register">New to Umbrella Talk? Register</Link> : <Link to="/login">Already have an account? Login</Link> }
+              <p className="mt-2 text-center text-sm text-gray-500">
+                {type === "welcome" ? '' : type === "login" ? (
+                  <>
+                    New to Umbrella Talk? <span className="font-semibold text-orange-500 hover:text-orange-600"><Link to="/register">Register</Link></span> 
+                  </>
+                ) : (
+                  <>
+                    Already have an account? <span className="font-semibold text-orange-500 hover:text-orange-600"><Link to="/login">Login</Link></span> 
+                  </>
+                )}
               </p>
             </div>
         </div>
