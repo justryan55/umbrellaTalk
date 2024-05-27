@@ -2,10 +2,10 @@ import LoginRegisterButton from './LoginRegisterButton'
 
 export default function AuthForm({ type }) {
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div className="flex min-h-full flex-col justify-center px-6 lg:px-8">
       <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
             <form className="space-y-6" 
-                  action={type === "login" ? "/api/login" : type === "register" ? "/api/register" : ""}
+                  action={type === "login" ? "/api/auth/login" : type === "register" ? "/api/auth/register" : ""}
                   method="POST">
                     
               {type === "register" ? 
