@@ -1,11 +1,11 @@
 import './assets/styles/App.css'
-import WelcomePage from './pages/WelcomePage'
+// import WelcomePage from './pages/WelcomePage'
 
 function App() {
 
   return (
     <>
-      <WelcomePage />
+      {/* <WelcomePage /> */}
     </>
   )
 }
