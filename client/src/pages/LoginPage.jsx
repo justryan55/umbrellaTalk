@@ -1,11 +1,11 @@
 import PageHeader from '../components/WelcomeLoginRegisterPageHeader'
-import AuthService from '../components/AuthForm'
+import AuthForm from '../components/AuthForm'
 
 export default function LoginPage() {
   return (
     <div>
         <PageHeader action={"login"} />
-        <AuthService action={"login"} />
+        <AuthForm action={"login"} />
     </div>
   )
 }

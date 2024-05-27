@@ -90,7 +90,7 @@ export default function AuthForm({ action }) {
               }
 
               <div>
-                <LoginRegisterButton name={action} />
+                <LoginRegisterButton action={action} />
               </div>
             </form>
     </div>
