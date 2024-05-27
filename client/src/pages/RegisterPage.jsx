@@ -5,7 +5,7 @@ export default function LoginPage() {
   return (
     <div>
         <PageHeader action={"register"} />
-        <AuthForm type="submit" action={"register"} />
+        <AuthForm action={"register"} />
       
     </div>
   )
