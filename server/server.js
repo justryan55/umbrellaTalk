@@ -31,7 +31,6 @@ app.post("/api/auth/register", async (req, res, next) => {
             password: req.body.password
         })
         const result = await user.save()
-        res.redirect("/")
     } catch(err) {
         return next(err)
     }
