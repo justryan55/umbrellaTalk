@@ -4,7 +4,12 @@ export default function AuthForm({ action }) {
   
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log("Form submitted")
+
+    const formData = new FormData(e.target)
+    const payload = Object.fromEntries(formData)
+    console.log(payload)
+    console.log("User added")
+
   }
 
   return (
@@ -12,7 +17,6 @@ export default function AuthForm({ action }) {
       <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
             <form className="space-y-6" 
                   action={action === "login" ? "/api/auth/login" : action === "register" ? "/api/auth/register" : ""}
-                  method="POST"
                   onSubmit={handleSubmit}>
                     
               {action === "register" ? 
