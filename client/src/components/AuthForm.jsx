@@ -1,12 +1,19 @@
 import LoginRegisterButton from './LoginRegisterButton'
 
 export default function AuthForm({ action }) {
+  
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log("Form submitted")
+  }
+
   return (
     <div className="flex min-h-full flex-col justify-center px-6 lg:px-8">
       <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
             <form className="space-y-6" 
                   action={action === "login" ? "/api/auth/login" : action === "register" ? "/api/auth/register" : ""}
-                  method="POST">
+                  method="POST"
+                  onSubmit={handleSubmit}>
                     
               {action === "register" ? 
                 <div>

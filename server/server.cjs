@@ -7,7 +7,8 @@ const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
-const User = require("./models/User")
+const User = require("./models/User.cjs")
+const cors = require("cors")
 
 
 dotenv.config()
@@ -23,6 +24,12 @@ const connectDatabase = async () => {
     }
 }
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(cors({
+    origin: 'http://localhost:3000'
+  }));
+
 app.post("/api/auth/register", async (req, res, next) => {
     try {
         const user = new User({
@@ -30,7 +37,9 @@ app.post("/api/auth/register", async (req, res, next) => {
             email: req.body.email,
             password: req.body.password
         })
-        const result = await user.save()
+
+        await user.save()
+
     } catch(err) {
         return next(err)
     }
