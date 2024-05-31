@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function LoginRegisterButton({action}) {
   return (
-    <div>
+    <div className="auth-form-submit-btn-container">
         <button
             type="submit"
             action = {action}

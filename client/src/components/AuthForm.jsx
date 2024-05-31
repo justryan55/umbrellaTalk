@@ -77,13 +77,13 @@ export default function AuthForm({ action }) {
               </div>
   
               <div>
-                <div className="flex items-center justify-between">
+                <div className="password-container">
                   <label htmlFor="password" className="auth-form-label">
                     Password
                   </label>
                   {action === "login" ? 
                       <div className="text-sm">
-                        <a href="#" className="font-semibold text-orange-500 hover:text-orange-600">
+                        <a href="#" className="forgot-password">
                           Forgot password?
                         </a>
                       </div>
