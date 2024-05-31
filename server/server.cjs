@@ -36,9 +36,27 @@ app.post("/api/auth/register", async (req, res, next) => {
             name: req.body.name,
             email: req.body.email,
             password: req.body.password
-        })
+        });
 
-        await user.save()
+        const userInsert = await user.save();
+
+        if(userInsert.errors) {
+            return res.send({
+                'status': false,
+                'message': userInsert.errors,
+            });
+        }
+
+
+        // log in the user
+           
+        
+        return res.send({
+            'status': true,
+            'message': 'user registered',
+        });
+
+        
 
     } catch(err) {
         return next(err)

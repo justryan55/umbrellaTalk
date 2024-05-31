@@ -1,14 +1,35 @@
 import LoginRegisterButton from './LoginRegisterButton'
 
 export default function AuthForm({ action }) {
-  
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     const formData = new FormData(e.target)
     const payload = Object.fromEntries(formData)
-    console.log(payload)
-    console.log("User added")
+
+    const params = {
+      method: 'GET',
+      headers: new Headers(),
+      body: null,
+    };
+  
+    if (payload) {
+      params.method = 'POST';
+      params.headers.set('Content-Type', 'application/json');
+      params.body = JSON.stringify(payload);
+    }
+
+    const res = await fetch("/api/auth/register", params);
+    console.log(res);
+
+    if(res.status) {
+      // redirect to logged in page
+
+      return;
+    }
+
+
+    alert(res.message);
 
   }
 
@@ -32,6 +53,7 @@ export default function AuthForm({ action }) {
                       autoComplete="name"
                       required
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+
                     />
                   </div>
               </div>
