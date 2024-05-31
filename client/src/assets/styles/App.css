@@ -11,10 +11,15 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding: 20px 6px 5px 6px;
     margin-top: 50px;
     min-height: 100%;
     flex: 1 1 0%;
+}
+
+.welcome-page-header-content {
+    width: 50%;
 }
 
 .welcome-page-header-logo {
@@ -74,7 +79,7 @@
 }
 
 .auth-form-content {
-    width: 50%;
+    width: 33%;
 }
 
 .auth-form-label {
@@ -94,7 +99,12 @@
 }
  
 .forgot-password {
+    display: block;
     font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    line-height: 1.5rem;
+    margin-top: 15px;
     color: #ed8936;
     text-decoration: none;
 }
@@ -122,9 +132,12 @@
 
 }
 
-.auth-form-submit-btn {
+.auth-form-submit-btn-container {
     display: flex;
     justify-content: center;
+}
+
+.auth-form-submit-btn {
     width: 50%;
     padding: 10px 20px;
     margin-top: 15px;
