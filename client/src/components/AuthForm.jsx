@@ -19,7 +19,7 @@ export default function AuthForm({ action }) {
       params.body = JSON.stringify(payload);
     }
 
-    const res = await fetch("/api/auth/register", params);
+    const res = await fetch("http://localhost:5000/api/auth/register", params);
     console.log(res);
 
     if(res.status) {
@@ -34,15 +34,15 @@ export default function AuthForm({ action }) {
   }
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 lg:px-8">
-      <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" 
+    <div className="auth-form-container">
+      <div className="auth-form-content">
+            <form className="auth-form" 
                   action={action === "login" ? "/api/auth/login" : action === "register" ? "/api/auth/register" : ""}
                   onSubmit={handleSubmit}>
                     
               {action === "register" ? 
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label htmlFor="name" className="auth-form-label">
                     Full Name
                   </label>
                   <div className="mt-2">
@@ -52,7 +52,7 @@ export default function AuthForm({ action }) {
                       type="name"
                       autoComplete="name"
                       required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="auth-form-input"
 
                     />
                   </div>
@@ -61,7 +61,7 @@ export default function AuthForm({ action }) {
               }
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="email" className="auth-form-label">
                   Email
                 </label>
                 <div className="mt-2">
@@ -71,14 +71,14 @@ export default function AuthForm({ action }) {
                     type="email"
                     autoComplete="email"
                     required
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="auth-form-input"
                   />
                 </div>
               </div>
   
               <div>
                 <div className="flex items-center justify-between">
-                  <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label htmlFor="password" className="auth-form-label">
                     Password
                   </label>
                   {action === "login" ? 
@@ -97,7 +97,7 @@ export default function AuthForm({ action }) {
                     type="password"
                     autoComplete="password"
                     required
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="auth-form-input"
                   />
                 </div>
               </div>
@@ -105,7 +105,7 @@ export default function AuthForm({ action }) {
               {action === "register" ? 
                 <div>
                   <div className="flex items-center justify-between">
-                    <label htmlFor="confirm-password" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="confirm-password" className="auth-form-label">
                       Confirm Password
                     </label>
                   </div>
@@ -115,7 +115,7 @@ export default function AuthForm({ action }) {
                       name="confirm-password"
                       type="password"
                       required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="auth-form-input"
                     />
                   </div>
                 </div>

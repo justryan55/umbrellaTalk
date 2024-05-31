@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.welcome-page-header-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 6px 5px 6px;
+    margin-top: 50px;
+    min-height: 100%;
+    flex: 1 1 0%;
+}
+
+.welcome-page-header-logo {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: 5rem;
+}
+
+.welcome-page-main-header {
+    margin-top: 1.25rem;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+    line-height: 2.25rem;
+    letter-spacing: -0.025em;
+    color: rgba(17, 24, 39, 1);	
+}
+
+.welcome-page-description {
+    margin-top: 1.25rem;
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+.welcome-page-action-description {
+    margin-top: 1.25rem;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    color: rgba(17, 24, 39, 1);	
+}
+
+.welcome-page-action-link {
+    font-weight: 600;
+    color: #ed8936;
+    text-decoration: none;
+}
+
+.welcome-page-action-link:hover {
+    color: #dd6b20;
+}
+
+.welcome-page-action-link a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.auth-form-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    width: 100%;
+}
+
+.auth-form-content {
+    display: flex;
+    justify-content: center;
+}
+
+.auth-form-label {
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    color: rgba(17, 24, 39, 1);	
+}
+
+.auth-form-input {
+    display: flex;
+    width: 100%;
+    border-radius: 0.375rem;
+    border-width: 0px;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    color: rgba(17, 24, 39, 1);	
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.auth-form-submit-btn {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    border-radius: 0.375rem;
+    background-color: #ed8936;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.5rem; 
+    border-style: solid;
+}
+  
+.auth-form-submit-btn a {
+    text-decoration: none;
+    color: #fff;
+}
+
+  .auth-form-submit-btn:hover {
+    background-color: #dd6b20;
+}
+  
+  .auth-form-submit-btn:focus-visible {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+  
+  .auth-form-submit-btn:focus-visible.outline-orange-600 {
+    outline-color: #dd6b20;
+}
+  
+ 
