@@ -12,24 +12,28 @@ export default function AuthForm({ action }) {
       headers: new Headers(),
       body: null,
     };
-  
+    
     if (payload) {
       params.method = 'POST';
       params.headers.set('Content-Type', 'application/json');
       params.body = JSON.stringify(payload);
     }
+    
+    if (action === "register"){
+      const res = await fetch("http://localhost:5000/api/auth/register", params);
+  
+      if(res.status == 200) {
+        // redirect to logged in page
+        return;
+      }
+      alert(res.message);
 
-    const res = await fetch("http://localhost:5000/api/auth/register", params);
-    console.log(res);
+    } else if (action === "login"){
+      const res = await fetch("http://localhost:5000/api/auth/login", params);
 
-    if(res.status) {
-      // redirect to logged in page
-
-      return;
+      
     }
-
-
-    alert(res.message);
+    
 
   }
 
@@ -37,7 +41,7 @@ export default function AuthForm({ action }) {
     <div className="auth-form-container">
       <div className="auth-form-content">
             <form className="auth-form" 
-                  action={action === "login" ? "/api/auth/login" : action === "register" ? "/api/auth/register" : ""}
+                  // action={action === "login" ? "/api/auth/login" : action === "register" ? "/api/auth/register" : ""}
                   onSubmit={handleSubmit}>
                     
               {action === "register" ? 
