@@ -70,6 +70,7 @@
     text-decoration: none;
 }
 
+
 .auth-form-container {
     display: flex;
     flex-direction: column;
@@ -79,7 +80,7 @@
 }
 
 .auth-form-content {
-    width: 33%;
+    width: 30%;
 }
 
 .auth-form-label {
@@ -138,7 +139,7 @@
 }
 
 .auth-form-submit-btn {
-    width: 50%;
+    width: 100%;
     padding: 10px 20px;
     margin-top: 15px;
     border: none; 
@@ -163,4 +164,10 @@
 
 .auth-form-submit-btn:hover {
     background-color: #dd6b20;
+}
+
+.welcome-page-action-btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }

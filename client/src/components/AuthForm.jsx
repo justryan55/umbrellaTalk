@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router'
 import LoginRegisterButton from './LoginRegisterButton'
 
 export default function AuthForm({ action }) {
+  const navigate = useNavigate()
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -23,15 +26,17 @@ export default function AuthForm({ action }) {
       const res = await fetch("http://localhost:5000/api/auth/register", params);
   
       if(res.status == 200) {
-        // redirect to logged in page
+        navigate('/dashboard')
         return;
       }
-      alert(res.message);
 
     } else if (action === "login"){
       const res = await fetch("http://localhost:5000/api/auth/login", params);
 
-      
+      if (res.status === 200){
+        navigate('/dashboard')
+        return 
+      }
     }
     
 
@@ -129,7 +134,7 @@ export default function AuthForm({ action }) {
               <div>
                 <LoginRegisterButton action={action} />
               </div>
-            </form>
+          </form>
     </div>
 </div>
 

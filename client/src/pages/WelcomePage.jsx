@@ -5,7 +5,7 @@ export default function WelcomePage() {
   return (
     <div>
         <PageHeader action={"welcome"} />
-        <div className="flex .flex-column w-full justify-center gap-3">
+        <div className='welcome-page-action-btn-container'>
           <LoginRegisterButton action={"login"}/>
           <LoginRegisterButton action={"register"}/>
         </div>
