@@ -102,7 +102,9 @@ app.post('/api/auth/login', async (req, res, next) => {
 
     res.status(200).json({
         message: "User is logged in",
-        token: token
+        token: token,
+        userName: payload.name,
+        userEmail: payload.email
     })
 })
 

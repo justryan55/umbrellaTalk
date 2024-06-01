@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
 import { Navigate, useNavigate } from 'react-router'
-import { AuthenticationContext } from "../services/AuthContext"
+import { AuthenticationContext } from "../services/AuthContext.jsx"
 import {jwtDecode} from "jwt-decode"
 
 export const ProtectedRoute = ({ children }) => {
@@ -27,17 +27,14 @@ export const ProtectedRoute = ({ children }) => {
         if (isTokenExpired(token)){
           localStorage.removeItem('token')
           navigate('/')
-        } else {
-          // ?Set user
-          console.log("Hello")
-        }
+        } 
       }
     }, [token, navigate, setIsAuthenticated])
 
     return (
     <div>
       {
-        (isAuthenticated || token) ?
+        (isAuthenticated && token) ?
           <div>
             { children }
           </div>

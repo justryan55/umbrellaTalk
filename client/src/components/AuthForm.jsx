@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router'
 import LoginRegisterButton from './LoginRegisterButton'
 import { useContext } from 'react'
-import { AuthenticationContext } from '../services/AuthContext'
+import { AuthenticationContext, UserContext } from '../services/AuthContext'
 
 export default function AuthForm({ action }) {
   const navigate = useNavigate()
 
   const [isAuthenticated, setIsAuthenticated] = useContext(AuthenticationContext)
+  const [user, setUser] = useContext(UserContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -33,16 +34,22 @@ export default function AuthForm({ action }) {
         navigate('/dashboard')
         return;
       }
-
-    } else if (action === "login"){
-      const res = await fetch("http://localhost:5000/api/auth/login", params);
-      if (res.status === 200){
-        const { token } = await res.json()   
-        localStorage.setItem('token', token)   
-        setIsAuthenticated(true)
-        navigate('/dashboard')
-        return 
-      }
+    } 
+    
+    if (action === "login"){
+        const res = await fetch("http://localhost:5000/api/auth/login", params);
+          if (res.status === 200){
+            const { token, userName, userEmail } = await res.json()  
+            const newUser = ({
+              name: userName,
+              email: userEmail
+            })
+            setIsAuthenticated(true)
+            localStorage.setItem('token', token)
+            localStorage.setItem('user', JSON.stringify(newUser))
+            navigate('/dashboard')
+            return 
+          }
     }
     
 

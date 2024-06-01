@@ -1,14 +1,15 @@
-import { Navigate, createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter } from "react-router-dom"
 import WelcomePage from "../pages/WelcomePage"
 import LoginPage from "../pages/LoginPage"
 import RegisterPage from "../pages/RegisterPage"
 import DashboardPage from "../pages/DashboardPage"
 import { ProtectedRoute } from "../pages/ProtectedRoute"
-import { AuthenticationContext } from "../services/AuthContext"
-import { useContext } from "react"
 
 
 const AppRouter = () => {
+
+    const token = localStorage.getItem('token')
+
     const router = createBrowserRouter([
         {
             path: "/",
@@ -16,20 +17,15 @@ const AppRouter = () => {
         },
         {
             path: "/login",
-            element: <LoginPage />,
+            element: token ? <DashboardPage /> : <LoginPage />,
         },
         {
             path: "/register",
-            element: <RegisterPage />,
+            element: token ? <DashboardPage /> : <RegisterPage />,
         },
         {
-            element: <ProtectedRoute />,
-            children: [
-                {
-                    path: "/dashboard",
-                    element: <DashboardPage />,
-                }
-            ]
+            path: "/dashboard",
+            element: <ProtectedRoute children={<DashboardPage />} />
         }
     ])
     
