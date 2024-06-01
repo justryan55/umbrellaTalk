@@ -28,6 +28,7 @@ export const ProtectedRoute = ({ children }) => {
           localStorage.removeItem('token')
           navigate('/')
         } else {
+          // ?Set user
           console.log("Hello")
         }
       }
