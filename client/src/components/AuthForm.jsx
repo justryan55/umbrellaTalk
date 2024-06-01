@@ -32,8 +32,9 @@ export default function AuthForm({ action }) {
 
     } else if (action === "login"){
       const res = await fetch("http://localhost:5000/api/auth/login", params);
-
       if (res.status === 200){
+        const { token } = await res.json()   
+        localStorage.setItem('jwt', token)   
         navigate('/dashboard')
         return 
       }

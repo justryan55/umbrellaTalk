@@ -3,6 +3,7 @@ import WelcomePage from "../pages/WelcomePage"
 import LoginPage from "../pages/LoginPage"
 import RegisterPage from "../pages/RegisterPage"
 import DashboardPage from "../pages/DashboardPage"
+import { ProtectedRoute } from "../pages/ProtectedRoute"
 
 
 const router = createBrowserRouter([
@@ -19,10 +20,15 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
     },
     {
-        path: "/dashboard",
-        element: <DashboardPage />,
-
+        element: <ProtectedRoute />,
+        children: [
+            {
+                path: "/dashboard",
+                element: <DashboardPage />,
+            }
+        ]
     }
+    
 ])
 
 export default router 
