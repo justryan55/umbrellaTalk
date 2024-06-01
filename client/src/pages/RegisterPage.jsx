@@ -3,10 +3,13 @@ import AuthForm from '../components/AuthForm'
 
 export default function LoginPage() {
   return (
-    <div>
-        <PageHeader action={"register"} />
-        <AuthForm action={"register"} />
-      
+    <div className='container'>
+      <div className='section-container'>
+        <div>
+            <PageHeader action={"register"} />
+            <AuthForm action={"register"} />
+        </div>
+      </div>
     </div>
   )
 }

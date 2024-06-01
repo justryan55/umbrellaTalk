@@ -36,6 +36,23 @@
 
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-container {
+    width: 50%;
+    padding: 25px 75px 100px;
+    margin: 30px;
+    box-shadow: 
+    0px 3px 1px -2px rgba(0,0,0,0.2),
+    0px 2px 2px 0px rgba(0,0,0,0.14),
+    0px 1px 5px 0px rgba(0,0,0,0.12);
+}
+
 .welcome-page-header-container {
     display: flex;
     flex-direction: column;
@@ -45,10 +62,11 @@
     margin-top: 50px;
     min-height: 100%;
     flex: 1 1 0%;
+    width: 100%;
 }
 
 .welcome-page-header-content {
-    width: 50%;
+    width: 100%;
 }
 
 .welcome-page-header-logo {
@@ -99,7 +117,6 @@
     text-decoration: none;
 }
 
-
 .auth-form-container {
     display: flex;
     flex-direction: column;
@@ -109,7 +126,7 @@
 }
 
 .auth-form-content {
-    width: 30%;
+    width: 80%;
 }
 
 .auth-form-label {
@@ -146,7 +163,7 @@
 .auth-form-input {
     display: block;
     width: 100%;
-    padding: 10px 12px;
+    padding: 10px 0px;
     line-height: 1.5;
     border-radius: 4px;
     color: rgba(0, 0, 0, 0.87);
@@ -165,6 +182,7 @@
 .auth-form-submit-btn-container {
     display: flex;
     justify-content: center;
+    width: 30%;
 }
 
 .auth-form-submit-btn {
