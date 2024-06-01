@@ -9,7 +9,6 @@ import { ProtectedRoute } from "../pages/ProtectedRoute"
 const AppRouter = () => {
 
     const token = localStorage.getItem('token')
-
     const router = createBrowserRouter([
         {
             path: "/",
