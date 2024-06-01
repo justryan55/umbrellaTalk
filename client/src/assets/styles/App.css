@@ -19,6 +19,20 @@
     left: 0;
     position: fixed;
     z-index: 1;
+    border-radius: 5px 5px 0px 0px; 
+}
+
+.nav-icon:hover{
+    box-sizing: border-box;
+    border-radius: 5px;
+    cursor: pointer;
+    stroke: orange;
+    transform: scale(1.2);
+}
+
+.logo {
+    stroke: orange
+
 }
 
 .welcome-page-header-container {
@@ -184,4 +198,83 @@
     display: flex;
     justify-content: center;
     gap: 10px;
+}
+
+/* .message {
+    display: flex;
+    flex-direction: column; 
+    margin-top: 20px;
+ } */
+ 
+ .message-top {
+     display: flex;
+ }
+ 
+ .message-img {
+     width: 40px;
+     height: 40px;
+     margin-right: 10px;
+     margin-top: 15px;
+ }
+ 
+ .message-text{
+     padding: 10px;
+     border-radius: 20px;
+     background-color: #ffde9d;
+     max-width: 300px;
+ }
+ 
+ .message-bottom-timestamp {
+     font-size: 12px;
+ }
+ 
+ /* .message.own{
+     align-items: flex-end;
+ }
+ 
+ .message.own .messageText{
+     background-color: #fa9c39;
+ } */
+
+ .conversation-snapshot-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+}
+
+.conversation-snapshot-container:hover{
+    background-color: #ffde9d;
+}
+
+.snapshot-content {
+    display: grid;
+    grid-template-columns: 1fr 20fr 1fr; 
+    align-items: center;
+
+} 
+
+/* 
+.homePage .conversation:nth-child(2) {
+    margin-top: 48px;
+} */
+
+.snapshot-profile-image {
+    height: 60px;
+    margin-right: 20px;
+}
+
+.snapshot-last-user {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.snapshot-last-message, .snapshot-timestamp {
+    font-size: 0.75rem;
+    color: rgb(95, 101, 106);
+}
+
+.snapshot-message-sent-image {
+    margin-left: 35px;
+    margin-top: 10px;
 }
