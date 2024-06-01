@@ -2,7 +2,7 @@ import profilePicture from '../assets/images/profile-picture.png'
 
 export default function MessageSnapshot({own}) {
   return (
-    <div className={own ? 'message own' : 'message'}>
+    <div className={own ? 'outgoing-message' : 'incoming-message'}>
         <div className='message-top'>
             <img 
               className='message-img'

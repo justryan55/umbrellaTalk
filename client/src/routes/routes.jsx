@@ -3,6 +3,7 @@ import WelcomePage from "../pages/WelcomePage"
 import LoginPage from "../pages/LoginPage"
 import RegisterPage from "../pages/RegisterPage"
 import DashboardPage from "../pages/DashboardPage"
+import ConversationPage from "../pages/ConversationPage"
 import { ProtectedRoute } from "../pages/ProtectedRoute"
 
 
@@ -25,6 +26,10 @@ const AppRouter = () => {
         {
             path: "/dashboard",
             element: <ProtectedRoute children={<DashboardPage />} />
+        },
+        {
+            path: "/conversation",
+            element: <ConversationPage />
         }
     ])
     
