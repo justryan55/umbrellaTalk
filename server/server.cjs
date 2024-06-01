@@ -98,7 +98,7 @@ app.post('/api/auth/login', async (req, res, next) => {
         password: user.password,
     }
 
-    const token = jwt.sign(payload, secretKey, { expiresIn: '60'} )
+    const token = jwt.sign(payload, secretKey, { expiresIn: '60s'} )
 
     res.status(200).json({
         message: "User is logged in",
