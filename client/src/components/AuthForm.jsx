@@ -1,8 +1,12 @@
 import { useNavigate } from 'react-router'
 import LoginRegisterButton from './LoginRegisterButton'
+import { useContext } from 'react'
+import { AuthenticationContext } from '../services/AuthContext'
 
 export default function AuthForm({ action }) {
   const navigate = useNavigate()
+
+  const [isAuthenticated, setIsAuthenticated] = useContext(AuthenticationContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -35,6 +39,7 @@ export default function AuthForm({ action }) {
       if (res.status === 200){
         const { token } = await res.json()   
         localStorage.setItem('jwt', token)   
+        setIsAuthenticated(true)
         navigate('/dashboard')
         return 
       }

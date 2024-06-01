@@ -1,15 +1,23 @@
-import { useContext } from 'react';
-import { AuthenticationContext } from '../services/AuthContext';
+import { useContext, useState } from "react"
+import { Navigate } from "react-router"
+import { AuthenticationContext } from "../services/AuthContext"
 
 
-export const ProtectedRoute = ( {token}) => {
+export const ProtectedRoute = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useContext(AuthenticationContext)
     const jwt = localStorage.getItem('jwt')
-    console.log(jwt)
-  return (
-    <div>
-      
 
+
+    return (
+    <div>
+      {
+        (isAuthenticated || jwt) ?
+          <div>
+            { children }
+          </div>
+          : 
+          <Navigate to='/' />
+      }
     </div>
   )
 }
