@@ -1,14 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    background-color: black;
+    background-color: #003049;
     overflow: hidden;
     height: 100vh;
 }
@@ -293,6 +286,7 @@ textarea::placeholder {
  .message-img {
      width: 40px;
      height: 40px;
+     margin-left: 10px;
      margin-right: 10px;
      margin-top: 15px;
  }
@@ -302,10 +296,13 @@ textarea::placeholder {
      border-radius: 20px;
      background-color: #ffde9d;
      max-width: 300px;
+     
  }
  
  .message-bottom-timestamp {
      font-size: 12px;
+     margin-left: 10px;
+
  }
  
  .outgoing-message{

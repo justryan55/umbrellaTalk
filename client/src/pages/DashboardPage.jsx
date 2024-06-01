@@ -15,6 +15,15 @@ export default function DashboardPage() {
   }, [])
 
   useEffect(() => {
+    document.body.style.backgroundColor = "#fff"
+
+    return () => {
+      document.body.style.backgroundColor = ""
+    }
+  }, [])
+
+
+  useEffect(() => {
     localStorage.setItem('user', JSON.stringify(user))
   }, [user])
 

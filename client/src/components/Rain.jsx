@@ -1,7 +1,7 @@
 import '../assets/styles/Rain.css'
 
 export default function Rain() {
-    const raindrops = Array.from({ length: 60 }, (_, i) => {
+    const raindrops = Array.from({ length: 65 }, (_, i) => {
         let size = Math.random() * 5
         let posX = Math.floor(Math.random() * window.innerWidth) 
         let delay = Math.random() * -20  
