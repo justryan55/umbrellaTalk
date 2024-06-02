@@ -8,6 +8,8 @@ export const ProtectedRoute = ({ children }) => {
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
 
+    
+
     const isTokenExpired = (token) => {
       if (!token){
         return true
@@ -26,21 +28,25 @@ export const ProtectedRoute = ({ children }) => {
       if (token){
         if (isTokenExpired(token)){
           localStorage.removeItem('token')
+          setIsAuthenticated(false)
           navigate('/')
-        } 
+        } else {
+          setIsAuthenticated(true)
+        }
+      } else {
+        setIsAuthenticated(false)
       }
     }, [token, navigate, setIsAuthenticated])
 
     return (
     <div>
-      {
-        (isAuthenticated && token) ?
+      {isAuthenticated && token ? (
           <div>
             { children }
           </div>
-          : 
+         ) : ( 
           <Navigate to='/' />
-      }
+      )}
     </div>
   )
 }

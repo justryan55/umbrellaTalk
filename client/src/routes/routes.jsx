@@ -17,15 +17,15 @@ const AppRouter = () => {
         },
         {
             path: "/login",
-            element: token ? <DashboardPage /> : <LoginPage />,
+            element: <LoginPage />,
         },
         {
             path: "/register",
-            element: token ? <DashboardPage /> : <RegisterPage />,
+            element: <RegisterPage />,
         },
         {
             path: "/dashboard",
-            element: <ProtectedRoute children={<DashboardPage />} />
+            element: <ProtectedRoute><DashboardPage /></ProtectedRoute>,
         },
         {
             path: "/conversation",

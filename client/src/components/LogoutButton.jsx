@@ -13,11 +13,7 @@ export default function LogoutButton() {
     const handleLogout = () => {
         if (token) {
             localStorage.removeItem('token')
-            setUser({
-                name: '',
-                email: '',
-                profileImg: ''
-            })
+            localStorage.removeItem('user')
             setIsAuthenticated(false)
             navigate('/')
         }

@@ -67,7 +67,7 @@ export default function AuthForm({ action }) {
                   <label htmlFor="name" className="auth-form-label">
                     Full Name
                   </label>
-                  <div className="mt-2">
+                  <div>
                     <input
                       id="name"
                       name="name"
@@ -86,7 +86,7 @@ export default function AuthForm({ action }) {
                 <label htmlFor="email" className="auth-form-label">
                   Email
                 </label>
-                <div className="mt-2">
+                <div>
                   <input
                     id="email"
                     name="email"
@@ -104,7 +104,7 @@ export default function AuthForm({ action }) {
                     Password
                   </label>
                   {action === "login" ? 
-                      <div className="text-sm">
+                      <div>
                         <a href="#" className="forgot-password">
                           Forgot password?
                         </a>
@@ -112,7 +112,7 @@ export default function AuthForm({ action }) {
                       : ""
                   }
                 </div>
-                <div className="mt-2">
+                <div>
                   <input
                     id="password"
                     name="password"
@@ -131,7 +131,7 @@ export default function AuthForm({ action }) {
                       Confirm Password
                     </label>
                   </div>
-                  <div className="mt-2">
+                  <div>
                     <input
                       id="confirm-password"
                       name="confirm-password"

@@ -1,8 +1,19 @@
 import PageHeader from '../components/WelcomeLoginRegisterPageHeader'
 import LoginRegisterButton from '../components/LoginRegisterButton'
 import Rain from '../components/Rain'
+import { useNavigate } from 'react-router'
+import { useEffect } from 'react'
 
 export default function WelcomePage() {
+  const navigate = useNavigate()
+  const token = localStorage.getItem('token')
+
+  useEffect(() => {
+    if (token){
+      navigate('/dashboard')
+    }
+  }, [token, navigate])
+
   return (
     <>
       <Rain />
