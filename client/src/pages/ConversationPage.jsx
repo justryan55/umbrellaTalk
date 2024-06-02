@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import ConversationApp from "../components/ConversationApp.jsx"
 import NavigationBar from "../components/NavigationBar.jsx"
+import HeaderBar from "../components/HeaderBar.jsx"
 
 
 export default function ConversationPage() {
@@ -15,8 +16,13 @@ export default function ConversationPage() {
 
   return (
     <div>
-      <NavigationBar />
+      <div className="header-bar-container">  
+        <HeaderBar />
+      </div>
       <ConversationApp />
+      <div className="navigation-bar-container">
+        <NavigationBar />
+      </div>
     </div>
   )
 }

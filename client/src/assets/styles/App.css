@@ -14,7 +14,51 @@ body {
   height: 100vh;
 }
 
-.navigation {
+.header-bar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    background-color: #003049;
+    height: 48px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    margin-bottom: 20px;
+}
+
+.header-bar-container {
+    padding-bottom: 50px;
+}
+
+.header-text {
+    margin-left: 15px;
+}
+
+.header-new-message-icon {
+    margin-right: 15px;
+}
+
+.header-new-message-icon:hover {
+    box-sizing: border-box;
+    border-radius: 5px;
+    cursor: pointer;
+    stroke: orange;
+    transform: scale(1.2);
+    transition: 0.3s ease;
+}
+
+.navigation-bar-container {
+    margin-top: 50px;
+}
+
+.navigation-bar {
+    margin-top: 50px;
+
+}
+
+.navigation-bar-content {
     display: flex;
     justify-content: space-between;
     background-color: #003049;
@@ -254,6 +298,7 @@ body {
     border-radius: 10px;
     border-color: lightgrey;
     border-style: solid;
+    margin-bottom: 50px;
 }
 
 .conversation-textarea-input{
@@ -330,7 +375,6 @@ textarea::placeholder {
     display: grid;
     grid-template-columns: 1fr 25fr 1fr; 
     align-items: center;
-
 } 
 
 .snapshot-profile-image {
@@ -351,4 +395,10 @@ textarea::placeholder {
 .snapshot-message-sent-image {
     margin-left: 35px;
     margin-top: 10px;
+}
+
+
+
+.dashboard-page-container .conversation-snapshot-dashboard-container .conversation-snapshot-container:nth-child(1){
+    margin-top: 50px;
 }
