@@ -421,6 +421,7 @@ textarea::placeholder {
 
 .user-list-content:hover {
     background-color: #ffde9d;
+    cursor: pointer;
 
 }
 

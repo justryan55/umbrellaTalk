@@ -7,9 +7,10 @@ const dotenv = require("dotenv")
 const cors = require("cors")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-const { body, validationResult } = require("express-validator");
+const { body, validationResult } = require("express-validator")
 const User = require("./models/User.cjs")
 const Conversation = require("./models/Conversation.cjs")
+const Message = require("./models/Message.cjs")
 
 
 dotenv.config()
@@ -133,6 +134,8 @@ app.post(`/api/conversation`, async (req, res, next) => {
         conversationIdObject: savedConversation._id
     })
 })
+
+
 
 
 app.listen(port, () => {
