@@ -120,6 +120,17 @@ app.get('/api/users', async (req, res, next) => {
     })
 })
 
+app.post(`/api/conversation`, async (req, res, next) => {
+    const conversation = new Conversation({
+       userOne: req.body.user,
+    })
+
+    const savedConversation = await conversation.save()
+
+    res.status(200).json({
+        message: savedConversation._id
+    })
+})
 
 
 app.listen(port, () => {

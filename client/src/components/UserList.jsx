@@ -8,8 +8,25 @@ const UserList = ({user}) => {
   const navigate = useNavigate()
   const [userListComponents, setUserListComponents] = useContext(UserListContext)
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setUserListComponents([])
+
+    const res = await fetch("http://localhost:5000/api/conversation", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user: user[1]
+      })
+    })
+
+      if (res.status = 200){
+
+        const { coversationId } = await res.json()
+        console.log({conversationId})
+      }
+
     navigate(`/conversation/${user[1]}`)
   }
 
