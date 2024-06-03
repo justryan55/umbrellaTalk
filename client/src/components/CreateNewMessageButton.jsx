@@ -35,7 +35,6 @@ export default function CreateNewMessageButton() {
                 )
                 
 
-                console.log(userListComponents)
 
                 setUserListComponents(users)
 
