@@ -131,11 +131,13 @@ app.post(`/api/conversation`, async (req, res, next) => {
     const savedConversation = await conversation.save()
 
     res.status(200).json({
-        conversationIdObject: savedConversation._id
+        conversationId: savedConversation._id
     })
 })
 
+app.post('/api/conversation/message', async (req, res, next) => {
 
+})
 
 
 app.listen(port, () => {
