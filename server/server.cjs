@@ -128,15 +128,25 @@ app.post(`/api/conversation`, async (req, res, next) => {
         userTwo: req.body.userTwo,
     })
 
-    const savedConversation = await conversation.save()
+    const saveConversation = await conversation.save()
 
     res.status(200).json({
-        conversationId: savedConversation._id
+        conversationId: saveConversation._id
     })
 })
 
 app.post('/api/conversation/message', async (req, res, next) => {
+    const message = new Message({
+        conversationId: req.body.conversationId,
+        sender: req.body.sender,
+        message: req.body.message 
+    })
 
+    const saveMessage = await message.save()
+
+    res.status(200).json({
+        message: "Sent"
+    })
 })
 
 

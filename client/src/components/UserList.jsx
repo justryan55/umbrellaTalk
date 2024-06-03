@@ -27,7 +27,6 @@ const UserList = ({user}) => {
  
       if (res.ok){
         const { conversationId }  = await res.json()
-        console.log(conversationId)
         navigate(`/conversation/${conversationId}`)
 
       }
