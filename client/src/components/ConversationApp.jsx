@@ -7,12 +7,12 @@ export default function ConversationApp() {
     <div className='conversation-app-container'>
       <div className='conversation-content'>
           <div className='conversation-app-top'>
-            <IndividualMessage />
+            {/* <IndividualMessage />
             <IndividualMessage own={true}/>
             <IndividualMessage />
             <IndividualMessage />
 
-            <IndividualMessage own={true}/>
+            <IndividualMessage own={true}/> */}
           </div>
 
           <div className='conversation-app-bottom'>

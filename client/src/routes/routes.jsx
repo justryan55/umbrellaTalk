@@ -28,7 +28,7 @@ const AppRouter = () => {
             element: <ProtectedRoute><DashboardPage /></ProtectedRoute>,
         },
         {
-            path: "/conversation",
+            path: "/conversation/:conversationId",
             element: <ConversationPage />
         }
     ])

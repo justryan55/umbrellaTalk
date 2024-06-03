@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { createContext, useState } from "react";
 import UserList from "./UserList";
+
+
+export const UserListContext = createContext([])
 
 export default function CreateNewMessageButton() {
     const [userListComponents, setUserListComponents] = useState([]);
@@ -17,15 +20,28 @@ export default function CreateNewMessageButton() {
         const userList = await res.json()
 
         if (res.status === 200){
-            const userListArray = userList.user
-            const users = (
-                <div className="user-list-container">
-                    {userListArray.map((user) => (
-                    <UserList key={user._id} user={user.name}/>
-                    ))}
-                </div>
-            )
-            setUserListComponents(users)
+            if (userListComponents.length === 0){
+                const userListArray = userList.user
+            
+
+                const users = (
+                    <div className="user-list-container">
+                        <UserListContext.Provider value={[userListComponents, setUserListComponents]}>
+                            {userListArray.map((user) => (
+                            <UserList key={user.email} user={[user.name, user._id]} />
+                            ))}
+                        </UserListContext.Provider>
+                    </div>
+                )
+                
+
+                console.log(userListComponents)
+
+                setUserListComponents(users)
+
+            } else {
+                setUserListComponents([])
+            }
 
         } else {
             console.log("error")
