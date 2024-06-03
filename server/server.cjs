@@ -1,17 +1,15 @@
 const express = require('express')
 const app = express()
 const port = 5000;
-const path = require("path")
 const session = require("express-session")
-const passport = require("passport")
-const LocalStrategy = require("passport-local").Strategy
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
-const User = require("./models/User.cjs")
 const cors = require("cors")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const { body, validationResult } = require("express-validator");
+const User = require("./models/User.cjs")
+const Conversation = require("./models/Conversation.cjs")
 
 
 dotenv.config()
@@ -111,6 +109,18 @@ app.post('/api/auth/login', async (req, res, next) => {
 app.get("/", (req, res) => {
     res.send("")
 })
+
+
+app.get('/api/users', async (req, res, next) => {
+    const userList = await User.find({})
+
+    res.status(200).json({
+        message: "Success",
+        users: userList,
+    })
+})
+
+
 
 app.listen(port, () => {
     console.log(`Umbrella Talk listening on port ${port}`)

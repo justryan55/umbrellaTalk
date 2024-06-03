@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react"
 import { UserContext } from "../services/AuthContext.jsx"
 import NavigationBar from "../components/NavigationBar.jsx"
-import ConversationSnapshot from "../components/ConversationSnapshot.jsx"
 import HeaderBar from "../components/HeaderBar.jsx"
+import FetchConversationList from "../components/FetchConversationList.jsx"
 
 
 export default function DashboardPage() {
@@ -33,15 +33,8 @@ export default function DashboardPage() {
       <div className="header-bar-container">
         <HeaderBar />
       </div>
-      <ConversationSnapshot />
-      <ConversationSnapshot />
-      <ConversationSnapshot />
-      <ConversationSnapshot />
-      <ConversationSnapshot />
-      <ConversationSnapshot />
-      <ConversationSnapshot />
+      <FetchConversationList />
       <NavigationBar />
-
     </div>
   )
 }
