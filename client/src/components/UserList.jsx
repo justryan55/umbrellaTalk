@@ -7,6 +7,9 @@ import { useContext } from 'react'
 const UserList = ({user}) => {
   const navigate = useNavigate()
   const [userListComponents, setUserListComponents] = useContext(UserListContext)
+  const currentUserString = localStorage.getItem('user')
+  const currentUser = JSON.parse(currentUserString).id
+
 
   const handleClick = async () => {
     setUserListComponents([])
@@ -17,17 +20,18 @@ const UserList = ({user}) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        user: user[1]
+        userOne: currentUser,
+        userTwo: user[1]
       })
     })
 
-      if (res.status = 200){
+      if (res.ok){
+        const { conversationIdObject }  = await res.json()
+        const conversationId = JSON.stringify(conversationIdObject)
+        navigate(`/conversation/${conversationId}`)
 
-        const { coversationId } = await res.json()
-        console.log({conversationId})
       }
 
-    navigate(`/conversation/${user[1]}`)
   }
 
   return (

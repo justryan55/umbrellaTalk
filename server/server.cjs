@@ -102,7 +102,8 @@ app.post('/api/auth/login', async (req, res, next) => {
         message: "User is logged in",
         token: token,
         userName: payload.name,
-        userEmail: payload.email
+        userEmail: payload.email,
+        userId: user._id
     })
 })
 
@@ -128,7 +129,7 @@ app.post(`/api/conversation`, async (req, res, next) => {
     const savedConversation = await conversation.save()
 
     res.status(200).json({
-        message: savedConversation._id
+        conversationIdObject: savedConversation._id
     })
 })
 
