@@ -1,10 +1,11 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import IndividualMessage from './IndividualMessage';
 import sendImg from '../assets/images/send.svg'
 
 
 export default function ConversationApp() {
-  const [message, setMessage] = useState()
+  const [message, setMessage] = useState("")
+  const [messages, setMessages] = useState([])
 
   const currentUserString = localStorage.getItem('user')
   const currentUser = JSON.parse(currentUserString).id
@@ -14,7 +15,7 @@ export default function ConversationApp() {
   const conversationId = currentURLSplit[2]
 
   const sendMessage = async () => {
-    const res = await fetch("http://localhost:5000/api/conversation/message", {
+    const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}/message`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -28,12 +29,30 @@ export default function ConversationApp() {
 
     if (res.ok){
       const data = await res.json()
-      console.log(data)
+      
+      setMessages((prevMessages) => [...prevMessages, [data]])
     }
 
     setMessage("")
-
   }
+
+  const fetchMessages = async () => {
+    const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}/message`, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+
+    if (res.ok){
+      const data = await res.json()
+      setMessages([data])
+    }
+  }
+
+  useEffect(() => {
+    fetchMessages()
+  }, [conversationId])
 
 
   return (
@@ -46,6 +65,10 @@ export default function ConversationApp() {
             <IndividualMessage />
 
             <IndividualMessage own={true}/> */}
+          {messages.map((message) => (
+            <IndividualMessage key={message.id} messageDetails={message} />
+          ))}
+
           </div>
 
           <div className='conversation-app-bottom'>

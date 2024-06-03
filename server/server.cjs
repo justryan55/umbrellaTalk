@@ -135,18 +135,24 @@ app.post(`/api/conversation`, async (req, res, next) => {
     })
 })
 
-app.post('/api/conversation/message', async (req, res, next) => {
+app.post('/api/conversation/:conversationId/message', async (req, res, next) => {
+    const { conversationId } = req.params;
     const message = new Message({
         conversationId: req.body.conversationId,
         sender: req.body.sender,
         message: req.body.message 
     })
 
-    const saveMessage = await message.save()
+    const savedMessage = await message.save()
 
-    res.status(200).json({
-        message: "Sent"
-    })
+    res.status(200).json(savedMessage)
+})
+
+app.get('/api/conversation/:conversationId/message', async (req, res, next) => {
+    const { conversationId } = req.params;
+    const messages = await Message.find({ conversationId: conversationId})
+
+    res.status(200).json({messages})
 })
 
 
