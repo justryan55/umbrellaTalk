@@ -2,11 +2,16 @@ import { useContext, useState } from 'react'
 import IndividualMessage from './IndividualMessage';
 import sendImg from '../assets/images/send.svg'
 
+
 export default function ConversationApp() {
   const [message, setMessage] = useState()
 
   const currentUserString = localStorage.getItem('user')
   const currentUser = JSON.parse(currentUserString).id
+
+  const currentURL = window.location.pathname
+  const currentURLSplit = currentURL.split('/')
+  const conversationId = currentURLSplit[2]
 
   const sendMessage = async () => {
     const res = await fetch("http://localhost:5000/api/conversation/message", {
@@ -15,7 +20,7 @@ export default function ConversationApp() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        conversationId: "id",
+        conversationId: conversationId,
         sender: currentUser,
         message: message
       })
