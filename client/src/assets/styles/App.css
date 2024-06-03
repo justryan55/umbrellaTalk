@@ -402,3 +402,36 @@ textarea::placeholder {
 .dashboard-page-container .conversation-snapshot-dashboard-container .conversation-snapshot-container:nth-child(1){
     margin-top: 50px;
 }
+
+
+.user-list-container{
+    margin-top: 50px;
+    margin-left: 10px;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.user-list-content {
+    display: grid;
+    grid-template-columns: 1fr 25fr; 
+    align-items: center;
+}
+
+.user-list-content:hover {
+    background-color: #ffde9d;
+
+}
+
+.user-list-profile-image {
+    height: 60px;
+    margin-right: 20px;
+    margin-top: 10px;
+
+}
+
+.user-list-user {
+    font-size: 1rem;
+    font-weight: 600;
+    color: black;
+}
