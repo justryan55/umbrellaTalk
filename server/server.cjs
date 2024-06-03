@@ -123,7 +123,8 @@ app.get('/api/users', async (req, res, next) => {
 
 app.post(`/api/conversation`, async (req, res, next) => {
     const conversation = new Conversation({
-       userOne: req.body.user,
+        userOne: req.body.userOne,
+        userTwo: req.body.userTwo,
     })
 
     const savedConversation = await conversation.save()
