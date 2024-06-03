@@ -43,30 +43,28 @@ export default function ConversationApp() {
         'Content-Type': 'application/json'
       },
     })
-
+    console.log("1")
     if (res.ok){
       const data = await res.json()
       setMessages([data])
+      console.log("2")
+
     }
   }
 
   useEffect(() => {
+    console.log("3")
     fetchMessages()
+
   }, [conversationId])
 
-
+  
   return (
     <div className='conversation-app-container'>
       <div className='conversation-content'>
           <div className='conversation-app-top'>
-            {/* <IndividualMessage />
-            <IndividualMessage own={true}/>
-            <IndividualMessage />
-            <IndividualMessage />
-
-            <IndividualMessage own={true}/> */}
           {messages.map((message) => (
-            <IndividualMessage key={message.id} messageDetails={message} />
+            <IndividualMessage key={message.id} messageDetails={message} own={true} />
           ))}
 
           </div>
