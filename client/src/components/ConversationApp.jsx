@@ -45,8 +45,8 @@ export default function ConversationApp() {
     console.log("1")
     if (res.ok){
       const data = await res.json()
-
-      setMessages([data])
+      console.log(data)
+      setMessages(data)
 
     }
   }
@@ -64,7 +64,7 @@ export default function ConversationApp() {
           <div className='conversation-app-top'>
           {messages.map((message) => (
             <IndividualMessage 
-              key={message.id} 
+              key={message._id} 
               messageDetails={message} 
               own={message.sender === currentUser} />
           ))}

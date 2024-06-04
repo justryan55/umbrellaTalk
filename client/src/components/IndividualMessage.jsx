@@ -26,5 +26,3 @@ export default function MessageSnapshot({messageDetails, own}) {
   )
 }
 
-
-{/* <div className={own ? 'outgoing-message' : 'incoming-message'}> */}

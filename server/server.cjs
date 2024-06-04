@@ -152,7 +152,7 @@ app.get('/api/conversation/:conversationId/messages', async (req, res, next) => 
     const { conversationId } = req.params;
     const messages = await Message.find({ conversationId: conversationId})
     console.log(messages)
-    res.status(200).json({messages})
+    res.status(200).json(messages)
 })
 
 
