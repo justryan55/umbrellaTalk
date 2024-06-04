@@ -151,6 +151,30 @@ app.post(`/api/conversation`, async (req, res, next) => {
     }
 })
 
+app.get('/api/:userId/conversation', async (req, res, next ) => {
+    const { userId } = req.params
+
+    const existingConversations = await Conversation.find({
+        $or: [
+            { userOne: userId },
+            { userTwo: userId}
+        ]
+    })
+
+
+    const conversationIds = existingConversations.map(item => item.id)
+
+    const existingMessages = await Message.find({
+        conversationId: { $in: conversationIds }
+    })
+
+    console.log(existingMessages)
+    
+    res.status(200).json({
+        messageHistory: existingMessages
+    })
+})
+
 app.post('/api/conversation/:conversationId/messages', async (req, res, next) => {
     const { conversationId } = req.params;
     const message = new Message({

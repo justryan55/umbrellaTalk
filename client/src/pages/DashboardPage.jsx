@@ -33,7 +33,7 @@ export default function DashboardPage() {
       <div className="header-bar-container">
         <HeaderBar />
       </div>
-      {/* <FetchConversationList /> */}
+      <FetchConversationList />
       <NavigationBar />
     </div>
   )

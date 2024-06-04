@@ -5,6 +5,7 @@ import RegisterPage from "../pages/RegisterPage"
 import DashboardPage from "../pages/DashboardPage"
 import ConversationPage from "../pages/ConversationPage"
 import { ProtectedRoute } from "../pages/ProtectedRoute"
+import ProfilePage from "../pages/ProfilePage"
 
 
 const AppRouter = () => {
@@ -28,9 +29,14 @@ const AppRouter = () => {
             element: <ProtectedRoute><DashboardPage /></ProtectedRoute>,
         },
         {
+            path: "/account",
+            element: <ProfilePage />
+        },
+        {
             path: "/conversation/:conversationId",
             element: <ConversationPage />
         }
+        
     ])
     
     return router
