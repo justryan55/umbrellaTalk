@@ -29,7 +29,7 @@ export default function ConversationApp() {
 
     if (res.ok){
       const data = await res.json()
-      setMessages((prevMessages) => [...prevMessages, [data]])
+      setMessages((prevMessages) => [...prevMessages, data])
     }
 
     setMessage("")
@@ -42,7 +42,6 @@ export default function ConversationApp() {
         'Content-Type': 'application/json'
       },
     })
-    console.log("1")
     if (res.ok){
       const data = await res.json()
       console.log(data)
@@ -52,6 +51,7 @@ export default function ConversationApp() {
   }
 
   useEffect(() => {
+    console.log("Fetching messages...")
     setMessages([])
     fetchMessages()
 
@@ -62,12 +62,15 @@ export default function ConversationApp() {
     <div className='conversation-app-container'>
       <div className='conversation-content'>
           <div className='conversation-app-top'>
-          {messages.map((message) => (
+          {messages.map((message) => {
+          return (
             <IndividualMessage 
               key={message._id} 
               messageDetails={message} 
               own={message.sender === currentUser} />
-          ))}
+              );
+           })}
+
 
           </div>
 
