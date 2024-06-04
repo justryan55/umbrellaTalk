@@ -35,6 +35,7 @@ export default function ConversationApp() {
     setMessage("")
   }
 
+
   const fetchMessages = async () => {
     const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}/messages`, {
       method: "GET",
@@ -50,6 +51,7 @@ export default function ConversationApp() {
     }
   }
 
+  
   useEffect(() => {
     console.log("Fetching messages...")
     setMessages([])

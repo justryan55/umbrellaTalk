@@ -123,16 +123,32 @@ app.get('/api/users', async (req, res, next) => {
 })
 
 app.post(`/api/conversation`, async (req, res, next) => {
-    const conversation = new Conversation({
-        userOne: req.body.userOne,
-        userTwo: req.body.userTwo,
+
+    const { userOne, userTwo } = req.body
+
+    const existingConversation = await Conversation.findOne({
+        $or: [
+            { userOne, userTwo },
+            { userOne: userTwo, userTwo: userOne}
+        ]
     })
 
-    const saveConversation = await conversation.save()
+    if (existingConversation){
+        res.status(200).json({
+            conversationId: existingConversation._id
+        })
+    } else {
+        const conversation = new Conversation({
+            userOne: req.body.userOne,
+            userTwo: req.body.userTwo,
+        })
+    
+        const savedConversation = await conversation.save()
 
-    res.status(200).json({
-        conversationId: saveConversation._id
-    })
+        res.status(200).json({
+            conversationId: savedConversation._id
+        })    
+    }
 })
 
 app.post('/api/conversation/:conversationId/messages', async (req, res, next) => {
@@ -151,7 +167,6 @@ app.post('/api/conversation/:conversationId/messages', async (req, res, next) =>
 app.get('/api/conversation/:conversationId/messages', async (req, res, next) => {
     const { conversationId } = req.params;
     const messages = await Message.find({ conversationId: conversationId})
-    console.log(messages)
     res.status(200).json(messages)
 })
 
