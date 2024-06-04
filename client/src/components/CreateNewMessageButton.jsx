@@ -1,11 +1,13 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import UserList from "./UserList";
+import { UserContext } from "../services/AuthContext";
 
 
 export const UserListContext = createContext([])
 
 export default function CreateNewMessageButton() {
     const [userListComponents, setUserListComponents] = useState([]);
+    const [user, setUser] = useContext(UserContext)
 
     const fetchUsers = async () => {
         const params = {
@@ -21,8 +23,17 @@ export default function CreateNewMessageButton() {
 
         if (res.status === 200){
             if (userListComponents.length === 0){
-                const userListArray = userList.user
-            
+                const userListArray = userList.user     
+
+                const userListExcludingCurrentUserArray = userListArray.map((existingUser) => {
+                    if (existingUser.email === user.email){
+                        console.log(user.email)
+                        //find out how to remove this from the array
+                    } else {
+                        console.log(existingUser.email)
+                    }
+                }) 
+
 
                 const users = (
                     <div className="user-list-container">

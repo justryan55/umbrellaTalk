@@ -113,8 +113,8 @@ app.get("/", (req, res) => {
 })
 
 
-app.get('/api/users', async (req, res, next) => {
-    const userList = await User.find({}, 'name email')
+app.get('/api/users', async (req, res, next) => {  
+    const userList = await User.find({}, 'name email _id')
 
     res.status(200).json({
         message: "Success",
