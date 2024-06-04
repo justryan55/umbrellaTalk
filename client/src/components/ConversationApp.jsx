@@ -15,7 +15,7 @@ export default function ConversationApp() {
   const conversationId = currentURLSplit[2]
 
   const sendMessage = async () => {
-    const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}/message`, {
+    const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}/messages`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -29,7 +29,6 @@ export default function ConversationApp() {
 
     if (res.ok){
       const data = await res.json()
-      
       setMessages((prevMessages) => [...prevMessages, [data]])
     }
 
@@ -37,7 +36,7 @@ export default function ConversationApp() {
   }
 
   const fetchMessages = async () => {
-    const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}/message`, {
+    const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}/messages`, {
       method: "GET",
       headers: {
         'Content-Type': 'application/json'
@@ -46,14 +45,14 @@ export default function ConversationApp() {
     console.log("1")
     if (res.ok){
       const data = await res.json()
+
       setMessages([data])
-      console.log("2")
 
     }
   }
 
   useEffect(() => {
-    console.log("3")
+    setMessages([])
     fetchMessages()
 
   }, [conversationId])
@@ -64,7 +63,10 @@ export default function ConversationApp() {
       <div className='conversation-content'>
           <div className='conversation-app-top'>
           {messages.map((message) => (
-            <IndividualMessage key={message.id} messageDetails={message} own={true} />
+            <IndividualMessage 
+              key={message.id} 
+              messageDetails={message} 
+              own={message.sender === currentUser} />
           ))}
 
           </div>
