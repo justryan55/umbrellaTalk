@@ -18,7 +18,6 @@ export default function FetchConversationList() {
       const data = await res.json()
       const dataArray = data.messageHistory
 
-
       const sortedArray = dataArray.sort((a, b) => {
         if (a.conversationId === b.conversationId) {
           return new Date(b.createdAt) - new Date(a.createdAt);
