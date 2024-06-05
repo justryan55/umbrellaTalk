@@ -55,6 +55,15 @@ body {
     transition: 0.3s ease;
 }
 
+.back-icon {
+    margin-left: 15px;
+}
+
+.back-icon:hover {
+    cursor: pointer;
+}
+
+
 .navigation-bar-container {
     margin-top: 50px;
 }
@@ -443,3 +452,4 @@ textarea::placeholder {
     font-weight: 600;
     color: black;
 }
+

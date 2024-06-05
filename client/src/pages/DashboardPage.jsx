@@ -31,7 +31,7 @@ export default function DashboardPage() {
   return (
     <div className="dashboard-page-container">
       <div className="header-bar-container">
-        <HeaderBar />
+        <HeaderBar page={"dashboard"} />
       </div>
       <FetchConversationList />
       <NavigationBar />
