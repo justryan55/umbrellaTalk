@@ -16,6 +16,10 @@ export default function HeaderBar({page}) {
     <div className="header-bar-content">
         {page === "dashboard" ? (
           <p className="header-text" onClick={handleClick}>Welcome {user.name}</p>
+        ) : page === "contacts" ? (
+          <p className="header-text" onClick={handleClick}>Contacts</p>
+        ) : page === "settings" ? (
+          <p className="header-text" onClick={handleClick}>Account Settings</p>
         ) : (
           <svg xmlns="http://www.w3.org/2000/svg" 
                width="24" 
@@ -33,7 +37,13 @@ export default function HeaderBar({page}) {
           </svg>
         )
       }
-        {page === "dashboard" ? <CreateNewMessage /> : null }
+        {page === "dashboard" ? (
+        <CreateNewMessage />
+      ) : page === "contacts" ? (
+        null
+      ) : (
+        null
+      )}
     </div>
   )
 }

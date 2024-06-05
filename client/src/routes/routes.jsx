@@ -6,6 +6,7 @@ import DashboardPage from "../pages/DashboardPage"
 import ConversationPage from "../pages/ConversationPage"
 import { ProtectedRoute } from "../pages/ProtectedRoute"
 import ContactPage from "../pages/ContactPage"
+import AccountPage from "../pages/AccountPage"
 
 
 const AppRouter = () => {
@@ -31,6 +32,10 @@ const AppRouter = () => {
         {
             path: "/contacts",
             element: <ContactPage />
+        },
+        {
+            path: "/account",
+            element: <AccountPage />
         },
         {
             path: "/conversation/:conversationId",
