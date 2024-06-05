@@ -5,6 +5,8 @@ import { UserContext } from "../services/AuthContext";
 
 export const UserListContext = createContext([])
 
+export const UserListComponentContext = createContext([])
+
 export default function CreateNewMessage() {
     const [userListComponents, setUserListComponents] = useState([]);
     const [user, setUser] = useContext(UserContext)
@@ -38,9 +40,11 @@ export default function CreateNewMessage() {
                 const users = (
                     <div className="user-list-container">
                         <UserListContext.Provider value={[userListComponents, setUserListComponents]}>
-                            {userListArray.map((user) => (
-                            <UserList key={user.email} user={[user.name, user._id]} />
-                            ))}
+                            <UserListComponentContext.Provider value={[userListComponents, setUserListComponents]}>
+                                {userListArray.map((user) => (
+                                    <UserList key={user.email} user={[user.name, user._id]} />
+                                ))}
+                            </UserListComponentContext.Provider>
                         </UserListContext.Provider>
                     </div>
                 )
@@ -56,6 +60,7 @@ export default function CreateNewMessage() {
         } else {
             console.log("error")
         }
+
     }
 
   return (
