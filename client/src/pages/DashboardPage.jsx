@@ -1,12 +1,28 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../services/AuthContext.jsx"
 import NavigationBar from "../components/NavigationBar.jsx"
 import HeaderBar from "../components/HeaderBar.jsx"
 import FetchConversationList from "../components/FetchConversationList.jsx"
-
+import ConversationApp from "../components/ConversationApp.jsx"
 
 export default function DashboardPage() {
   const [user, setUser] = useContext(UserContext)
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+    }, []);
+
+
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'))
@@ -33,8 +49,14 @@ export default function DashboardPage() {
       <div className="header-bar-container">
         <HeaderBar page={"dashboard"} />
       </div>
-      <FetchConversationList />
-      <NavigationBar />
+      {isMobile ? (
+          <FetchConversationList />
+        ) : (
+        <>
+          <FetchConversationList />
+        </>
+      )}
+        <NavigationBar />
     </div>
   )
 }
