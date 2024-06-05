@@ -5,7 +5,7 @@ import { UserContext } from "../services/AuthContext";
 
 export const UserListContext = createContext([])
 
-export default function CreateNewMessageButton() {
+export default function CreateNewMessage() {
     const [userListComponents, setUserListComponents] = useState([]);
     const [user, setUser] = useContext(UserContext)
 

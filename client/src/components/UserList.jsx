@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router'
 import profilePicture from '../assets/images/profile-picture.png'
-import { UserListContext } from './CreateNewMessageButton'
+import { UserListContext } from './CreateNewMessage'
 import { useContext } from 'react'
 
 
