@@ -25,11 +25,10 @@ body {
     width: 100%;
     top: 0;
     left: 0;
-    margin-bottom: 20px;
 }
 
 .header-bar-container {
-    padding-bottom: 50px;
+    padding-bottom: 41px;
 }
 
 .header-text {
@@ -452,4 +451,3 @@ textarea::placeholder {
     font-weight: 600;
     color: black;
 }
-

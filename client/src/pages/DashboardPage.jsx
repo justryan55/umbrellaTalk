@@ -52,9 +52,10 @@ export default function DashboardPage() {
       {isMobile ? (
           <FetchConversationList />
         ) : (
-        <>
+        <div className={`content-container ${isMobile ? "mobile" : "desktop"}`}>
           <FetchConversationList />
-        </>
+          {!isMobile && <ConversationApp />}
+        </div>
       )}
         <NavigationBar />
     </div>
