@@ -17,7 +17,7 @@ export default function ConversationPage() {
   return (
     <div>
       <div className="header-bar-container">  
-        <HeaderBar />
+        <HeaderBar page={"conversation"} />
       </div>
       <ConversationApp />
       <div className="navigation-bar-container">
