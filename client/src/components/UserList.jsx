@@ -12,7 +12,6 @@ const UserList = ({user}) => {
 
 
   const handleClick = async () => {
-    setUserListComponents([])
 
     const res = await fetch("http://localhost:5000/api/conversation", {
       method: 'POST',
