@@ -161,6 +161,7 @@ app.get('/api/:userId/conversation', async (req, res, next ) => {
         ]
     })
 
+    console.log(existingConversations) 
 
     const conversationIds = existingConversations.map(item => item.id)
 
@@ -168,7 +169,6 @@ app.get('/api/:userId/conversation', async (req, res, next ) => {
         conversationId: { $in: conversationIds }
     })
 
-    console.log(existingMessages)
     
     res.status(200).json({
         messageHistory: existingMessages

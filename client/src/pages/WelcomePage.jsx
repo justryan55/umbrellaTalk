@@ -3,6 +3,7 @@ import LoginRegisterButton from '../components/LoginRegisterButton'
 import Rain from '../components/Rain'
 import { useNavigate } from 'react-router'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function WelcomePage() {
   const navigate = useNavigate()
@@ -21,8 +22,8 @@ export default function WelcomePage() {
         <div className='section-container'>
           <PageHeader action={"welcome"} />
           <div className='welcome-page-action-btn-container'>
-            <LoginRegisterButton action={"login"}/>
-            <LoginRegisterButton action={"register"}/>
+            <Link to='/login' style={{textDecoration: 'none', width: '100%'}}><LoginRegisterButton action={"login"}/></Link>
+            <Link to='/register'style={{textDecoration: 'none', width: '100%'}}><LoginRegisterButton action={"register"}/></Link>
           </div>
         </div>
       </div>

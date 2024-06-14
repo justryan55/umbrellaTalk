@@ -7,13 +7,12 @@ export default function LoginRegisterButton({action}) {
   
  
   return (
-    <div className="auth-form-submit-btn-container">
+    <div className="btn-container">
         <button
-            type="submit"
             action = {action}
-            className="auth-form-submit-btn"
+            className="btn"
             >
-                {action === "login" ? <Link to="/login">Login</Link> : action === "register" ? <Link to="/register">Register</Link> : <Link to="/">Back</Link>}
+                {action === "login" ? "Login" : "Register"}
         </button>
     </div>
   )
