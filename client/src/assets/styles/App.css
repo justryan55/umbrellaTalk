@@ -491,7 +491,8 @@ textarea::placeholder {
 }
 
 .profile-image {
-    width: 300px;
+    margin-top: 50px;
+    width: 250px;
 }
 
 .user-settings {
@@ -524,6 +525,7 @@ textarea::placeholder {
     border-radius: 8px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     resize: none;
+    overflow: hidden;
 }
 
 .account-settings-textarea-readonly {
