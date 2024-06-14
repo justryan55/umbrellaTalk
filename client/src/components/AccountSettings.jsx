@@ -59,11 +59,19 @@ export const AccountSettings = () => {
                 className='profile-image' />
             <p>Change Profile Picture</p>
         </div>
-        <p className='user-settings'>Username:   
+        <div className='user-settings-container'>
+            <p className='user-settings'>Username:</p>
             <textarea onChange={handleTextInput}
-                      value={user.name} />
-        </p>
-        <p className='user-settings'>Email: {user.email}</p>
+                        value={user.name}
+                        className='account-settings-textarea' />
+        </div>
+        <div className='user-settings-container'>
+            <p className='user-settings'>Email: </p>
+            <textarea className='account-settings-textarea-readonly' disabled>{user.email}</textarea>
+        </div>
+
+
+        <p className='delete-account-btn'>Delete Account</p>
     </div>
   )
 }
