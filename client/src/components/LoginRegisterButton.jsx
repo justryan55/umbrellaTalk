@@ -12,7 +12,7 @@ export default function LoginRegisterButton({action}) {
             action = {action}
             className="btn"
             >
-                {action === "login" ? "Login" : "Register"}
+                {action === "login" ? "Login" : "Register" }
         </button>
     </div>
   )
