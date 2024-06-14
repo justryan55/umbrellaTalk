@@ -122,6 +122,22 @@ app.get('/api/users', async (req, res, next) => {
     })
 })
 
+app.put('/api/users/:id', async (req, res, next) => {
+    const updateUsername = req.body.name
+    const userId = req.params.id
+
+    try {
+        const user = await User.findByIdAndUpdate(userId, 
+        { name: updateUsername },
+        { new: true } )
+
+        res.send(user)
+    } catch (err) {
+        next(err)
+    }
+
+})
+
 app.post(`/api/conversation`, async (req, res, next) => {
 
     const { userOne, userTwo } = req.body

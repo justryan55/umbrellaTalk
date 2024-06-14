@@ -489,3 +489,27 @@ textarea::placeholder {
     font-weight: 600;
     color: black;
 }
+
+.profile-image {
+    width: 300px;
+}
+
+.user-settings {
+    font-weight: 500;
+    font-size: 25px;
+    margin: 15px 0px;
+}
+
+.profile-image-settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.account-settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+}
