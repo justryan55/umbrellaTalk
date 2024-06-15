@@ -5,6 +5,9 @@ export default function MessageSnapshot({messageDetails, own}) {
   const [message, setMessage] = useState('')
   const [isEditing, setIsEditing] = useState(false)
   const timestamp = messageDetails.createdAt
+  const currentURL = window.location.pathname
+  const currentURLSplit = currentURL.split('/')
+  const conversationId = currentURLSplit[2]
 
   const handleEditClick = () => {
     setIsEditing(true)
@@ -14,15 +17,27 @@ export default function MessageSnapshot({messageDetails, own}) {
     setMessage(e.target.value)
   }
   
-  const handleTextAreaKeyDown = (e) => {
+  const handleTextAreaKeyDown = async (e) => {
     if (e.keyCode === 13){
-      setIsEditing(false)
-    }
+      try {
+        const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}/messages/${messageDetails._id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: message,
+          })
+        }) 
+        setIsEditing(false)  
+      } catch (err) {
+        console.log('There has been an error:', err)
+      }
+    } 
   }
 
   useEffect(() => {
       setMessage(messageDetails.message)
-      console.log(messageDetails)
   }, [messageDetails])
 
   return (

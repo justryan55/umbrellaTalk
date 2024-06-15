@@ -28,8 +28,11 @@ const connectDatabase = async () => {
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
   }));
 
 app.post("/api/auth/register", [
@@ -214,6 +217,25 @@ app.post('/api/conversation/:conversationId/messages', async (req, res, next) =>
 
     res.status(200).json(savedMessage)
 })
+
+app.put('/api/conversation/:conversationId/messages/:messageId', async (req, res, next) => {
+    
+    try {
+        const { conversationId, messageId } = req.params
+        const { message } = req.body
+
+        const updateMessage = await Message.findByIdAndUpdate(messageId,
+            { message: message },
+            { new: true }
+        )
+
+        res.send(updateMessage)
+    } catch (err) {
+        next (err)
+    }
+})
+
+
 
 app.get('/api/conversation/:conversationId/messages', async (req, res, next) => {
     const { conversationId } = req.params;
