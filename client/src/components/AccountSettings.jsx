@@ -1,10 +1,14 @@
 import { useContext, useEffect, useState } from 'react'
 import profileImg from '../assets/images/profile-picture.png'
-import { UserContext } from '../services/AuthContext'
+import { AuthenticationContext, UserContext } from '../services/AuthContext'
+import { useNavigate } from 'react-router'
 
 export const AccountSettings = () => {
     const [user, setUser] = useContext(UserContext)
     const [loading, setLoading] = useState(true)
+    const [isAuthenticated, setIsAuthenticated] = useContext(AuthenticationContext)
+    const token = localStorage.getItem('token')
+    const navigate = useNavigate()
 
     const handleTextInput = (e) => {
         const username = e.target.value
@@ -49,6 +53,22 @@ export const AccountSettings = () => {
 
     }
 
+    const handleDeleteClick = async () => {
+        try {
+            const res = await fetch(`http://localhost:5000/api/users/${user.id}`, {
+                method: 'DELETE' })
+
+            if (res.status === 200){
+                localStorage.removeItem('token')
+                localStorage.removeItem('user')
+                setIsAuthenticated(false)
+                navigate('/')
+                }
+        } catch (err) {
+            console.log('Error deleting user:', err)
+        }
+    }
+
     
     return (
     <div className='account-settings-container'>
@@ -71,7 +91,11 @@ export const AccountSettings = () => {
         </div>
 
 
-        <p className='delete-account-btn'>Delete Account</p>
+        <p className='delete-account-btn'
+           onClick={handleDeleteClick}
+           >
+            Delete Account
+           </p>
     </div>
   )
 }

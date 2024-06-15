@@ -138,6 +138,17 @@ app.put('/api/users/:id', async (req, res, next) => {
 
 })
 
+app.delete('/api/users/:id', async (req, res, next) => {
+    const userId = req.params.id
+
+    try {
+        const user = await User.findByIdAndDelete(userId)
+        res.send("Account Deleted")
+    } catch (err){
+        next(err)
+    }
+})
+
 app.post(`/api/conversation`, async (req, res, next) => {
 
     const { userOne, userTwo } = req.body
