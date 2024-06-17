@@ -235,6 +235,16 @@ app.put('/api/conversation/:conversationId/messages/:messageId', async (req, res
     }
 })
 
+app.delete('/api/conversation/:conversationId/messages/:messageId', async (req, res, next) => {
+    try {
+        const { conversationId, messageId } = req.params
+
+        const deleteMessage = await Message.findByIdAndDelete(messageId)
+        res.send("Message Deleted")
+    } catch (err){
+        next(err)
+    }
+})
 
 
 app.get('/api/conversation/:conversationId/messages', async (req, res, next) => {

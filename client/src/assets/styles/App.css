@@ -367,6 +367,11 @@ textarea::placeholder {
     margin-top: 15px;
 }
 
+.message-text.deleted-message {
+    font-style: italic;
+  }
+  
+
 .message-text{
     padding: 10px;
     border-radius: 20px;
