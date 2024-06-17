@@ -375,26 +375,43 @@ textarea::placeholder {
     margin-bottom: 20px;
 }
 
-.message-text-container:hover .edit-icon {
+.message-text-container:hover .edit-icon,
+.message-text-container:hover .bin-icon {
     display: block;
 } 
 
 .message-text-container {
     display: flex;
     justify-content: flex-end;
+    position: relative;
 }
 
-.edit-icon {
-    display: none;
-    position: absolute;
+.edit-icon,
+.bin-icon {
+    display: none; 
+    cursor: pointer; 
 }
+
 
 .edit-icon:hover {
     cursor: pointer;
 }
 
+
+.bin-icon:hover {
+    cursor: pointer;
+}
+
 .edit-icon-container {
     display: flex;
+}
+
+.icon-container {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    margin-left: 10px; 
+
 }
 
 .message-bottom-timestamp {
@@ -573,3 +590,4 @@ textarea::placeholder {
 .delete-account-btn:hover {
     background-color: #fb1e1e;
 }
+
