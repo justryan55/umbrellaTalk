@@ -63,6 +63,7 @@ export default function MessageSnapshot({messageDetails, own}) {
                       value={message}
                       onChange={handleTextAreaChange}
                       onKeyDown={handleTextAreaKeyDown}
+                      className='edit-text-area'
                       onBlur={() => setIsEditing(false)}
                       autoFocus
                     />
