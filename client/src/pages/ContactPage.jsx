@@ -34,7 +34,7 @@ export default function ContactPage() {
       <div className="user-list-container">
             {users.map((user) => {
             return (
-                <UserList key={user.email} user={[user.name, user._id]} />
+                <UserList key={user.email} user={[user.name, user._id]} icon={false} />
             )
             })}
         </div>

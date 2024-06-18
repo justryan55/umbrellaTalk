@@ -4,7 +4,7 @@ import { UserListContext } from './CreateNewMessage'
 import { useContext } from 'react'
 
 
-const UserList = ({user}) => {
+const UserList = ({user, icon}) => {
   const navigate = useNavigate()
   const [userListComponents, setUserListComponents] = useContext(UserListContext)
   const currentUserString = localStorage.getItem('user')
@@ -33,12 +33,12 @@ const UserList = ({user}) => {
   }
 
   return (
-      <div className='user-list-content' onClick={handleClick}>
+      <div className={icon ? 'user-list-content-icon' : 'user-list-content' } onClick={handleClick}>
           <img src={profilePicture} 
                alt='profile' 
                className='user-list-profile-image'
                />
-          <p className='user-list-user'>{user[0]}</p>
+          <p className={icon ? 'user-list-user-icon' : 'user-list-user'}>{user[0]}</p>
 
       </div>
   )

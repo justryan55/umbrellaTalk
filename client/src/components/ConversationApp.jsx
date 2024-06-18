@@ -72,10 +72,12 @@ export default function ConversationApp() {
               own={message.sender === currentUser} />
               );
            })}
-
-
           </div>
 
+           {location.pathname === '/dashboard' ? 
+           (<></>) 
+           
+           : (
           <div className='conversation-app-bottom'>
             <textarea className='conversation-textarea-input' 
                       name='message' 
@@ -98,7 +100,7 @@ export default function ConversationApp() {
                 <line x1="22" y1="2" x2="11" y2="13"></line>
                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
             </svg>
-          </div>
+          </div>)}
       </div>
     </div>
   )

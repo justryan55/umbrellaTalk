@@ -28,7 +28,7 @@ body {
 }
 
 .header-bar-container {
-    padding-bottom: 41px;
+    padding-bottom: 48px;
 }
 
 .header-text {
@@ -481,23 +481,36 @@ textarea::placeholder {
 
 .user-list-container{
     margin-top: 50px;
-    margin-left: 10px;
     position: fixed;
     left: 0;
     top: 0;
+    
 }
 
 .user-list-content {
     display: grid;
     grid-template-columns: 1fr 25fr; 
     align-items: center;
+    
+}
+
+.user-list-content-icon {
+    display: grid;
+    grid-template-columns: 1fr 25fr; 
+    background-color: #034f78;
+    border: 1px rgb(255, 255, 255, 50%) solid;
+}
+
+.user-list-content-icon:hover {
+    background-color: #015c8d;
+    cursor: pointer;
 }
 
 .user-list-content:hover {
     background-color: #ffde9d;
     cursor: pointer;
-
 }
+
 
 .user-list-profile-image {
     height: 60px;
@@ -511,6 +524,13 @@ textarea::placeholder {
     font-weight: 600;
     color: black;
 }
+
+.user-list-user-icon {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+}
+
 
 .profile-image {
     margin-top: 50px;

@@ -9,6 +9,8 @@ export const AccountSettings = () => {
     const [isAuthenticated, setIsAuthenticated] = useContext(AuthenticationContext)
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
+    const profileImage = user.profilePicture
+
 
     const handleTextInput = (e) => {
         const username = e.target.value
