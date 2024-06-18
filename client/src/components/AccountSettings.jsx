@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router'
 export const AccountSettings = () => {
     const [user, setUser] = useContext(UserContext)
     const [loading, setLoading] = useState(true)
-    const [isAuthenticated, setIsAuthenticated] = useContext(AuthenticationContext)
+    const [setIsAuthenticated] = useContext(AuthenticationContext)
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
     const profileImage = user.profilePicture
@@ -89,7 +89,10 @@ export const AccountSettings = () => {
         </div>
         <div className='user-settings-container'>
             <p className='user-settings'>Email: </p>
-            <textarea className='account-settings-textarea-readonly' disabled>{user.email}</textarea>
+            <textarea className='account-settings-textarea-readonly' 
+                      value={user.email}
+                      disabled />
+            
         </div>
 
 

@@ -4,7 +4,7 @@ import { UserContext } from '../services/AuthContext'
 
 
 export default function FetchConversationList() {
-    const [user, setUser] = useContext(UserContext)
+    const [user] = useContext(UserContext)
     const [ConversationListComponent, setConversationListComponent] = useState()
 
     const fetchConversationList = async () => {
@@ -39,7 +39,7 @@ export default function FetchConversationList() {
       const messageHistory = (
         <div>
           {mostRecentMessages.map((message) => {
-            return <ConversationSnapshot key={message.id} message={message} />
+            return <ConversationSnapshot key={message._id} message={message} />
           })}
         </div>
       )

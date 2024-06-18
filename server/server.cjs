@@ -155,69 +155,79 @@ app.delete('/api/users/:id', async (req, res, next) => {
 })
 
 app.post(`/api/conversation`, async (req, res, next) => {
+    try {
+        const { userOne, userTwo } = req.body
 
-    const { userOne, userTwo } = req.body
-
-    const existingConversation = await Conversation.findOne({
-        $or: [
-            { userOne, userTwo },
-            { userOne: userTwo, userTwo: userOne}
-        ]
-    })
-
-    if (existingConversation){
-        res.status(200).json({
-            conversationId: existingConversation._id
+        const existingConversation = await Conversation.findOne({
+            $or: [
+                { userOne, userTwo },
+                { userOne: userTwo, userTwo: userOne}
+            ]
         })
-    } else {
-        const conversation = new Conversation({
-            userOne: req.body.userOne,
-            userTwo: req.body.userTwo,
-        })
-    
-        const savedConversation = await conversation.save()
 
-        res.status(200).json({
-            conversationId: savedConversation._id
-        })    
+        if (existingConversation){
+            res.status(200).json({
+                conversationId: existingConversation._id
+            })
+        } else {
+            const conversation = new Conversation({
+                userOne: req.body.userOne,
+                userTwo: req.body.userTwo,
+            })
+        
+            const savedConversation = await conversation.save()
+
+            res.status(200).json({
+                conversationId: savedConversation._id
+            })    
+        }
+    } catch (err) {
+        next (err)
     }
 })
 
 app.get('/api/:userId/conversation', async (req, res, next ) => {
-    const { userId } = req.params
+    try {
+        const { userId } = req.params
 
-    const existingConversations = await Conversation.find({
-        $or: [
-            { userOne: userId },
-            { userTwo: userId}
-        ]
-    })
+        const existingConversations = await Conversation.find({
+            $or: [
+                { userOne: userId },
+                { userTwo: userId}
+            ]
+        })
 
-    console.log(existingConversations) 
+        const conversationIds = existingConversations.map(item => item.id)
 
-    const conversationIds = existingConversations.map(item => item.id)
+        const existingMessages = await Message.find({
+            conversationId: { $in: conversationIds }
+        })
 
-    const existingMessages = await Message.find({
-        conversationId: { $in: conversationIds }
-    })
+        
+        res.status(200).json({
+            messageHistory: existingMessages
+        })
 
-    
-    res.status(200).json({
-        messageHistory: existingMessages
-    })
+    } catch (err) {
+        next (err)
+    }
 })
 
 app.post('/api/conversation/:conversationId/messages', async (req, res, next) => {
-    const { conversationId } = req.params;
-    const message = new Message({
-        conversationId: req.body.conversationId,
-        sender: req.body.sender,
-        message: req.body.message 
-    })
+    try {
+        const { conversationId } = req.params;
+        const message = new Message({
+            conversationId: req.body.conversationId,
+            sender: req.body.sender,
+            message: req.body.message 
+        })
 
-    const savedMessage = await message.save()
+        const savedMessage = await message.save()
 
-    res.status(200).json(savedMessage)
+        res.status(200).json(savedMessage)
+    } catch (err) {
+        next (err)
+    }
 })
 
 app.delete(`/api/conversation/:conversationId/messages`, async (req, res, next) => {
@@ -261,9 +271,13 @@ app.delete('/api/conversation/:conversationId/messages/:messageId', async (req, 
 
 
 app.get('/api/conversation/:conversationId/messages', async (req, res, next) => {
-    const { conversationId } = req.params;
-    const messages = await Message.find({ conversationId: conversationId})
-    res.status(200).json(messages)
+    try {
+        const { conversationId } = req.params;
+        const messages = await Message.find({ conversationId: conversationId})
+        res.status(200).json(messages)
+    } catch (err) {
+        next(err)
+    }
 })
 
 
