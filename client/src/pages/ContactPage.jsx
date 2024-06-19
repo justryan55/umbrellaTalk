@@ -2,7 +2,6 @@
 import NavigationBar from "../components/NavigationBar.jsx"
 import HeaderBar from "../components/HeaderBar.jsx"
 import { useContext, useEffect, useState } from "react"
-import CreateNewMessage, { UserListComponentContext } from "../components/CreateNewMessage.jsx"
 import { fetchUsers } from "../services/helpers.jsx";
 import UserList from "../components/UserList.jsx";
 import { UserContext } from "../services/AuthContext.jsx";
@@ -32,7 +31,7 @@ export default function ContactPage() {
     return () => {
       document.body.style.backgroundColor = ""
     }
-  }, [])
+  }, [user.id])
     
   return (
     <div>

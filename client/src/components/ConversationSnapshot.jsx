@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router'
-import profilePicture from '../assets/images/profile-picture.png'
 import tick from '../assets/images/tick.svg'
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { UserContext } from '../services/AuthContext';
+import PropTypes from 'prop-types';
+
 
 const ConversationSnapshot = ({conversation, message}) => {
   const navigate = useNavigate();
@@ -10,32 +11,24 @@ const ConversationSnapshot = ({conversation, message}) => {
   const [conversationName, setConversationName] = useState("")
   const [timestamp, setTimestamp] = useState('');
   const [currentUser] = useContext(UserContext)
-  const [messageText, setMessageText] = useState('')
   const [altProfileImage, setAltProfileImage] = useState('')
-
-  console.log(conversation)
   
 
-  const handleClick = () => {
-    const conversationId = conversation._id
 
-    navigate(`/conversation/${conversationId}`);
-  };
-
-  const getUserList = async () => {
-    const res = await fetch("http://localhost:5000/api/users", {
+  const getUserList = useCallback(async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/users", {
       method: "GET", 
       headers: {'Content-Type': 'application/json'}
     });
+
     const data = await res.json();
 
-    console.log(data.user)
     data.user.map((user) => {
       if (user._id === message.sender){
         setSenderName(user.name)
       }
     })
-
 
     data.user.map(user => {
       if (currentUser.id === conversation.userOne){
@@ -48,9 +41,26 @@ const ConversationSnapshot = ({conversation, message}) => {
           setConversationName(user.name)
           setAltProfileImage(user.profilePictureID)
         }
-
       }
-    })  
+    })} catch (err) {
+      console.log(err)
+    }  
+  }, [currentUser.id, conversation.userOne, conversation.userTwo, message.sender]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await getUserList();
+      setTimestamp(formatTimestamp(message.createdAt));
+    };
+  
+    fetchData();
+  }, [getUserList, message.createdAt]);
+   
+
+  const handleClick = () => {
+    const conversationId = conversation._id
+
+    navigate(`/conversation/${conversationId}`);
   };
 
   const formatTimestamp = (timestamp) => {
@@ -71,11 +81,6 @@ const ConversationSnapshot = ({conversation, message}) => {
   };
 
 
-  useEffect(() => {
-    getUserList();
-    setTimestamp(formatTimestamp(message.createdAt));
-  }, []);
- 
 
 
 
@@ -96,5 +101,19 @@ const ConversationSnapshot = ({conversation, message}) => {
     </div>
   )
 }
+
+ConversationSnapshot.propTypes = {
+  conversation: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    userOne: PropTypes.string.isRequired,
+    userTwo: PropTypes.string.isRequired,
+  }).isRequired,
+  message: PropTypes.shape({
+    sender: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
 
 export default ConversationSnapshot

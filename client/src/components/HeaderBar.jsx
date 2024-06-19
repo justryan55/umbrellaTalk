@@ -1,11 +1,12 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../services/AuthContext"
 import CreateNewMessage from "./CreateNewMessage"
 import { useNavigate } from "react-router"
+import PropTypes from "prop-types"; 
 
 
 export default function HeaderBar({page}) {
-    const [user, setUser] = useContext(UserContext)
+    const [user] = useContext(UserContext)
     const navigate = useNavigate()
     const currentURL = window.location.pathname
     const currentURLSplit = currentURL.split('/')
@@ -20,7 +21,7 @@ export default function HeaderBar({page}) {
 
     const deleteConversation = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}/messages`, {
+        await fetch(`http://localhost:5000/api/conversation/${conversationId}/messages`, {
           method: "DELETE"
         })
         navigate('/dashboard')
@@ -30,36 +31,46 @@ export default function HeaderBar({page}) {
       }
     }
 
-    const getAltUser = async () => {
-      const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}`, {
-        method: "GET", 
-        headers: {'Content-Type': 'application/json'}
-      });
-      const data = await res.json();
-  
-      if (user.id === data[0].userOne){
-        setAltUserId(data[0].userTwo)
-      } else {
-        setAltUserId(data[0].userOne)
-      }
+    
 
- 
-      const userList = await fetch("http://localhost:5000/api/users", {
-            method: "GET", 
-            headers: {'Content-Type': 'application/json'}
-          });
-      
-      const userData = await userList.json();
-        
-      userData.user.map(u => {
-        if (u._id === altUserId){
-          setAltUserName(u.name)
+    useEffect(() => {
+      const getAltUser = async () => {
+        try {
+        const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}`, {
+          method: "GET", 
+          headers: {'Content-Type': 'application/json'}
+        });
+        const data = await res.json();
+    
+        if (user.id === data[0].userOne){
+          setAltUserId(data[0].userTwo)
+        } else {
+          setAltUserId(data[0].userOne)
         }
-      })
-    };
+  
+   
+        const userList = await fetch("http://localhost:5000/api/users", {
+              method: "GET", 
+              headers: {'Content-Type': 'application/json'}
+            });
+        
+        const userData = await userList.json();
+          
+        userData.user.map(u => {
+          if (u._id === altUserId){
+            setAltUserName(u.name)
+          }
+        })
+      } catch (err){
+        console.log(err)
+      }
+      };
 
-    getAltUser()
-
+      if (page === "conversation") {
+        getAltUser();
+      }
+    }, [conversationId, page, user.id, altUserId]);
+  
 
   return (
     <div className="header-bar-content">
@@ -113,3 +124,8 @@ export default function HeaderBar({page}) {
     </div>
   )
 }
+
+HeaderBar.propTypes = {
+  page: PropTypes.string.isRequired,
+};
+

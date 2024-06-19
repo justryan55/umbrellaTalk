@@ -10,7 +10,7 @@ export const UserListComponentContext = createContext([])
 
 export default function CreateNewMessage() {
     const [users, setUsers] = useState([]);
-    const [user, setUser] = useContext(UserContext)
+    const [user] = useContext(UserContext)
 
     const fetchUsersAndDisplay = async () => {
         const fetchedUsers = await fetchUsers();

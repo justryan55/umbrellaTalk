@@ -1,12 +1,9 @@
 import { useNavigate } from 'react-router'
-import profilePicture from '../assets/images/profile-picture.png'
-import { UserListContext } from './CreateNewMessage'
-import { useContext } from 'react'
+import PropTypes from 'prop-types';
 
 
 const UserList = ({user, icon}) => {
   const navigate = useNavigate()
-  const [userListComponents, setUserListComponents] = useContext(UserListContext)
   const currentUserString = localStorage.getItem('user')
   const currentUser = JSON.parse(currentUserString).id
 
@@ -44,5 +41,12 @@ const UserList = ({user, icon}) => {
       </div>
   )
 }
+
+
+UserList.propTypes = {
+  user: PropTypes.array.isRequired,
+  icon: PropTypes.bool.isRequired
+}
+
 
 export default UserList

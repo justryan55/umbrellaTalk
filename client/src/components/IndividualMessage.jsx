@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
-import profilePicture from '../assets/images/profile-picture.png'
 import { UserContext } from '../services/AuthContext'
+import PropTypes from "prop-types"; 
 
 export default function MessageSnapshot({messageDetails, own}) {
   const [message, setMessage] = useState('')
@@ -24,7 +24,7 @@ export default function MessageSnapshot({messageDetails, own}) {
   const handleTextAreaKeyDown = async (e) => {
     if (e.keyCode === 13){
       try {
-        const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}/messages/${messageDetails._id}`, {
+        await fetch(`http://localhost:5000/api/conversation/${conversationId}/messages/${messageDetails._id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ export default function MessageSnapshot({messageDetails, own}) {
 
   const handleDeleteMessageClick = async () => {
     try {
-      const res = await fetch (`http://localhost:5000/api/conversation/${conversationId}/messages/${messageDetails._id}`, {
+      await fetch (`http://localhost:5000/api/conversation/${conversationId}/messages/${messageDetails._id}`, {
         method: 'DELETE'
       })
       setMessage("This message has been deleted")
@@ -144,4 +144,15 @@ export default function MessageSnapshot({messageDetails, own}) {
         )}
     </div>
   )
+}
+
+
+MessageSnapshot.propTypes = {
+  messageDetails: PropTypes.shape({
+    _id: PropTypes.string.isRequired, 
+    message: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    length: PropTypes.number.isRequired, 
+  }).isRequired,
+  own: PropTypes.bool.isRequired
 }
