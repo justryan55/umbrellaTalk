@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from 'react'
-import profileImg from '../assets/images/profile-picture.png'
 import { AuthenticationContext, UserContext } from '../services/AuthContext'
 import { useNavigate } from 'react-router'
+import Avvvatars from 'avvvatars-react'
+
 
 export const AccountSettings = () => {
     const [user, setUser] = useContext(UserContext)
@@ -75,11 +76,8 @@ export const AccountSettings = () => {
     return (
     <div className='account-settings-container'>
         <div className='profile-image-settings'>
-            <img 
-                src={profileImg}
-                alt='profile'
-                className='profile-image' />
-            <p>Change Profile Picture</p>
+        <Avvvatars value={user.email} size={200} style='character'/>
+        <p>Change Profile Picture</p>
         </div>
         <div className='user-settings-container'>
             <p className='user-settings'>Username:</p>

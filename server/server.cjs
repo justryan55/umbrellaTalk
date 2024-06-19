@@ -197,15 +197,33 @@ app.get('/api/:userId/conversation', async (req, res, next ) => {
             ]
         })
 
-        const conversationIds = existingConversations.map(item => item.id)
-
+        const conversationIds = existingConversations.map(conversation => conversation.id)
+        
         const existingMessages = await Message.find({
             conversationId: { $in: conversationIds }
         })
 
-        
+
+        const latestMessages = await Message.aggregate([
+            { $match: { conversationId: { $in: conversationIds } } },
+            { $sort: { createdAt: -1 } },
+            { $group: {
+                _id: "$conversationId",
+                latestMessage: { $first: "$$ROOT" }
+            }},
+        ]);
+
+        const conversationWithLatestMessage = existingConversations.map(conversation => {
+            const latestMessage = latestMessages.find(message => message._id === conversation.id);
+
+            return {
+                conversation: conversation,
+                latestMessage: latestMessage
+            }
+        } )
+
         res.status(200).json({
-            messageHistory: existingMessages
+            conversation: conversationWithLatestMessage
         })
 
     } catch (err) {

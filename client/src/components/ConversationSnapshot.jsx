@@ -1,15 +1,21 @@
 import { useNavigate } from 'react-router'
 import profilePicture from '../assets/images/profile-picture.png'
 import tick from '../assets/images/tick.svg'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../services/AuthContext';
 
-const ConversationSnapshot = (message) => {
+const ConversationSnapshot = ({conversation, message}) => {
   const navigate = useNavigate();
   const [senderName, setSenderName] = useState("")
   const [timestamp, setTimestamp] = useState('');
+  const [user] = useContext(UserContext)
+  const [messageText, setMessageText] = useState('')
+
+  console.log(message)
+  
 
   const handleClick = () => {
-    const conversationId = message.message.conversationId
+    const conversationId = conversation._id
 
     navigate(`/conversation/${conversationId}`);
   };
@@ -23,12 +29,22 @@ const ConversationSnapshot = (message) => {
 
 
     const userNames = data.user.map((user) => {
-      if (user._id === message.message.sender){
+      if (user._id === message.sender){
         setSenderName(user.name)
       }
     })
 
+    // const conversationName = data.user.map((user) => {
+    //   if (user._id === conversation.userOne){
+    //     setConversationName(conversation.userTwo)
+    //   } else if (user._id === conversation.userTwo) {
+    //     setConversationName(conversation.userOne)
+    //   }
+    // })
+    
   };
+
+
 
 
   const formatTimestamp = (timestamp) => {
@@ -51,10 +67,9 @@ const ConversationSnapshot = (message) => {
 
   useEffect(() => {
     getUserList();
-    setTimestamp(formatTimestamp(message.message.createdAt));
+    setTimestamp(formatTimestamp(message.createdAt));
   }, []);
  
-
 
 
 
@@ -63,8 +78,8 @@ const ConversationSnapshot = (message) => {
         <div className='snapshot-content'>
             <img src={profilePicture} alt='profile' className='snapshot-profile-image'/>
             <div className='snapshot-first-row'>
-                <p className='snapshot-last-user'>Username</p>
-                <p className='snapshot-last-message'>{senderName}: {message.message.message}</p>
+                <p className='snapshot-last-user'>{"senderName"}</p>
+                <p className='snapshot-last-message'>{senderName}: {message.message}</p>
             </div>
             <div className='snapshot-second-row'>
                 <p className='snapshot-timestamp'>{timestamp}</p>

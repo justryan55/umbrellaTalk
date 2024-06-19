@@ -5,7 +5,7 @@ import { UserContext } from '../services/AuthContext'
 
 export default function FetchConversationList() {
     const [user] = useContext(UserContext)
-    const [ConversationListComponent, setConversationListComponent] = useState()
+    const [conversationListComponent, setConversationListComponent] = useState()
 
     const fetchConversationList = async () => {
       const res = await fetch(`http://localhost:5000/api/${user.id}/conversation`, {
@@ -14,37 +14,24 @@ export default function FetchConversationList() {
           'Content-Type': 'application/json'
         },
       })
+
       
       const data = await res.json()
-      const dataArray = data.messageHistory
 
-      const sortedArray = dataArray.sort((a, b) => {
-        if (a.conversationId === b.conversationId) {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        }
-        return a.conversationId - b.conversationId;
-      });
-      
-      const mostRecentMessages = [];
-      const seenConversations = new Set();
-      
-      for (const message of sortedArray) {
-        if (!seenConversations.has(message.conversationId)) {
-          mostRecentMessages.push(message);
-          seenConversations.add(message.conversationId);
-        }
-      }     
-    
-
-      const messageHistory = (
+      const dataArray = data.conversation   
+          
+      const conversationHistory = (
         <div>
-          {mostRecentMessages.map((message) => {
-            return <ConversationSnapshot key={message._id} message={message} />
-          })}
+          {dataArray.map((conversation) => (
+            <ConversationSnapshot 
+              key={conversation.conversation._id} 
+              conversation={conversation.conversation} 
+              message={conversation.latestMessage.latestMessage} />
+          ))}
         </div>
       )
 
-      setConversationListComponent(messageHistory)
+      setConversationListComponent(conversationHistory)
     }
 
     useEffect(() => {
@@ -53,7 +40,7 @@ export default function FetchConversationList() {
 
   return (
     <div>
-        {ConversationListComponent}
+        {conversationListComponent}
     </div>
   )
 }
