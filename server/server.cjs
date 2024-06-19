@@ -129,13 +129,15 @@ app.get('/api/users', async (req, res, next) => {
 
 app.put('/api/users/:id', async (req, res, next) => {
     const updateUsername = req.body.name
+    const updateProfileImage = req.body.profilePictureID
     const userId = req.params.id
 
     try {
         const user = await User.findByIdAndUpdate(userId, 
-        { name: updateUsername },
+        { name: updateUsername, 
+            profilePictureID: updateProfileImage
+         },
         { new: true } )
-
         res.send(user)
     } catch (err) {
         next(err)

@@ -630,3 +630,24 @@ textarea::placeholder {
     resize: none;
     overflow: hidden;
 }
+
+.avatar-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.avatar-text {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.modal-close {
+    padding: 5px;
+}
+
+.avatar-image:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
