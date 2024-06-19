@@ -39,11 +39,11 @@ export default function AuthForm({ action }) {
     if (action === "login"){
         const res = await fetch("http://localhost:5000/api/auth/login", params);
           if (res.status === 200){
-            const { token, userName, userEmail, userId, profilePictureURL } = await res.json()  
+            const { token, userName, userEmail, userId, profilePictureID } = await res.json()  
             const newUser = ({
               name: userName,
               email: userEmail,
-              profilePicture: profilePictureURL,
+              profilePictureID: profilePictureID,
               id: userId, 
             })
             setIsAuthenticated(true)

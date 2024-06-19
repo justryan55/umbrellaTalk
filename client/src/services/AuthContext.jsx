@@ -9,7 +9,7 @@ export function AuthContext({ children }){
     const [user, setUser] = useState({
         name: '',
         email: '',
-        profileImg: ''
+        profilePictureID: ''
     })
 
     return (

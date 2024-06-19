@@ -56,7 +56,7 @@ app.post("/api/auth/register", [
             name: req.body.name,
             email: req.body.email,
             password: hashedPassword,
-            profilePictureURL: "../assets/images/profile-picture.png"
+            profilePictureID: "2"
         });
 
         const userInsert = await user.save();
@@ -109,7 +109,7 @@ app.post('/api/auth/login', async (req, res, next) => {
         userName: payload.name,
         userEmail: payload.email,
         userId: user._id,
-        profilePictureURL: user.profilePictureURL
+        profilePictureID: user.profilePictureID
     })
 })
 

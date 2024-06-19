@@ -1,18 +1,17 @@
 import { useContext, useEffect, useState } from 'react'
 import { AuthenticationContext, UserContext } from '../services/AuthContext'
 import { useNavigate } from 'react-router'
-import Avvvatars from 'avvvatars-react'
 
 
 export const AccountSettings = () => {
     const [user, setUser] = useContext(UserContext)
     const [loading, setLoading] = useState(true)
-    const [setIsAuthenticated] = useContext(AuthenticationContext)
+    const [isAuthenticated, setIsAuthenticated] = useContext(AuthenticationContext)
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
     const profileImage = user.profilePicture
 
-
+    
     const handleTextInput = (e) => {
         const username = e.target.value
         setUser((prevUser) => ({
@@ -72,12 +71,17 @@ export const AccountSettings = () => {
         }
     }
 
+    const openModal = () => {
+        
+    }
+
+
     
     return (
     <div className='account-settings-container'>
         <div className='profile-image-settings'>
-        <Avvvatars value={user.email} size={200} style='character'/>
-        <p>Change Profile Picture</p>
+            <img src={`/avatars/${user.profilePictureID}.svg`}/>
+        <p>Change profile picture</p>
         </div>
         <div className='user-settings-container'>
             <p className='user-settings'>Username:</p>
