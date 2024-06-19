@@ -644,6 +644,10 @@ textarea::placeholder {
     margin-bottom: 30px;
 }
 
+.change-profile-picture-text {
+    cursor: pointer;
+}
+
 .modal-close {
     padding: 5px;
 }

@@ -121,7 +121,7 @@ export const AccountSettings = () => {
     <div className='account-settings-container'>
         <div className='profile-image-settings'>
             <img src={`/avatars/${user.profilePictureID}.svg`} onClick={openModal}/>
-        <p onClick={openModal}>Change profile picture</p>
+        <p className="change-profile-picture-text" onClick={openModal}>Change profile picture</p>
         <Modal
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
