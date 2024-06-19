@@ -11,8 +11,9 @@ const ConversationSnapshot = ({conversation, message}) => {
   const [timestamp, setTimestamp] = useState('');
   const [currentUser] = useContext(UserContext)
   const [messageText, setMessageText] = useState('')
+  const [altProfileImage, setAltProfileImage] = useState('')
 
-  // console.log(conversation)
+  console.log(conversation)
   
 
   const handleClick = () => {
@@ -28,7 +29,7 @@ const ConversationSnapshot = ({conversation, message}) => {
     });
     const data = await res.json();
 
-    console.log(data)
+    console.log(data.user)
     data.user.map((user) => {
       if (user._id === message.sender){
         setSenderName(user.name)
@@ -40,18 +41,17 @@ const ConversationSnapshot = ({conversation, message}) => {
       if (currentUser.id === conversation.userOne){
         if (user._id === conversation.userTwo){
           setConversationName(user.name)
+          setAltProfileImage(user.profilePictureID)
         }
       } else {
         if (user._id === conversation.userOne){
           setConversationName(user.name)
+          setAltProfileImage(user.profilePictureID)
         }
 
       }
     })  
   };
-
-
-
 
   const formatTimestamp = (timestamp) => {
     const current = new Date();
@@ -82,7 +82,7 @@ const ConversationSnapshot = ({conversation, message}) => {
   return (
     <div className='conversation-snapshot-container' onClick={() => handleClick()}>
         <div className='snapshot-content'>
-            <img src={profilePicture} alt='profile' className='snapshot-profile-image'/>
+            <img src={`/avatars/${altProfileImage}.svg`} alt='profile' className='snapshot-profile-image'/>
             <div className='snapshot-first-row'>
                 <p className='snapshot-last-user'>{conversationName}</p>
                 <p className='snapshot-last-message'>{senderName}: {message.message}</p>

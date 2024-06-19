@@ -32,9 +32,10 @@ const UserList = ({user, icon}) => {
 
   }
 
+
   return (
       <div className={icon ? 'user-list-content-icon' : 'user-list-content' } onClick={handleClick}>
-          <img src={profilePicture} 
+          <img src={`/avatars/${user[2]}.svg`} 
                alt='profile' 
                className='user-list-profile-image'
                />

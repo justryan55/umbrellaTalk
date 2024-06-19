@@ -19,7 +19,7 @@ export default function FetchConversationList() {
         
         const data = await res.json()
         const dataArray = data.conversation   
-            
+               
         const conversationHistory = (
           <div>
             {dataArray.map((conversation) => (

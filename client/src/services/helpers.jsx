@@ -13,18 +13,11 @@ export const fetchUsers = async () => {
 	if (res.status !== 200) {
 		return [];
 	}
-
+	
 	const usersResponse = await res.json();
 
 	console.log(usersResponse.user)
 
-	// const userListExcludingCurrentUserArray = userListArray.map((existingUser) => {
-	// 	if (existingUser.email === user.email){
-	// 		console.log(user.email)
-	// 		//find out how to remove this from the array
-	// 	} else {
-	// 		console.log(existingUser.email)
-	// 	}
-	// }) 
+
 	return usersResponse.user;
 }

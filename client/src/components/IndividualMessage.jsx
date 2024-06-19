@@ -78,9 +78,6 @@ export default function MessageSnapshot({messageDetails, own}) {
     })
   };
 
-  console.log(user)
-  console.log(altUserProfileId)
-
   getAltUserProfileImage()
 
   useEffect(() => {

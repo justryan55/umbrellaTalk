@@ -46,7 +46,7 @@ export default function CreateNewMessage() {
         <div className="user-list-container">
             {users.map((user) => {
             return (
-                <UserList key={user.email} user={[user.name, user._id]} icon={true}/>
+                <UserList key={user.email} user={[user.name, user._id, user.profilePictureID]} icon={true}/>
             )
             })}
         </div>
