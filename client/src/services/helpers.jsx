@@ -1,3 +1,4 @@
+
 export const fetchUsers = async () => {
 	const params = {
 		method: 'GET',
@@ -15,6 +16,7 @@ export const fetchUsers = async () => {
 
 	const usersResponse = await res.json();
 
+	console.log(usersResponse.user)
 
 	// const userListExcludingCurrentUserArray = userListArray.map((existingUser) => {
 	// 	if (existingUser.email === user.email){

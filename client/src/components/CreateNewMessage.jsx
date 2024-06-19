@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import UserList from "./UserList";
 import { UserContext } from "../services/AuthContext";
-import { fetchUsers } from "../helpers";
+import { fetchUsers } from "../services/helpers.jsx";
 
 
 export const UserListContext = createContext([])
@@ -10,11 +10,20 @@ export const UserListComponentContext = createContext([])
 
 export default function CreateNewMessage() {
     const [users, setUsers] = useState([]);
-    // const [user, setUser] = useContext(UserContext)
+    const [user, setUser] = useContext(UserContext)
 
     const fetchUsersAndDisplay = async () => {
-        const u = await fetchUsers();
-        setUsers(u);
+        const fetchedUsers = await fetchUsers();
+        const currentUser = fetchedUsers.find(u => u._id === user.id)
+
+        if (currentUser) {
+            const filteredUsers = fetchedUsers.filter(u => u._id !== user.id)
+            setUsers(filteredUsers)
+        } else {
+            console.log("Error")
+        }
+        
+
     }
 
   return (

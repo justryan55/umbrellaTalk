@@ -213,7 +213,7 @@ app.get('/api/:userId/conversation', async (req, res, next ) => {
             }},
         ]);
 
-        const conversationWithLatestMessage = existingConversations.map(conversation => {
+        const conversationWithLatestMessage = await existingConversations.map(conversation => {
             const latestMessage = latestMessages.find(message => message._id === conversation.id);
 
             return {

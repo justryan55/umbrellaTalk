@@ -3,17 +3,26 @@ import NavigationBar from "../components/NavigationBar.jsx"
 import HeaderBar from "../components/HeaderBar.jsx"
 import { useContext, useEffect, useState } from "react"
 import CreateNewMessage, { UserListComponentContext } from "../components/CreateNewMessage.jsx"
-import { fetchUsers } from "../helpers.js";
+import { fetchUsers } from "../services/helpers.jsx";
 import UserList from "../components/UserList.jsx";
+import { UserContext } from "../services/AuthContext.jsx";
 
 
 export default function ContactPage() {
   const [users, setUsers] = useState([]);
+  const [user] = useContext(UserContext)
 
   useEffect(() => {
     const getUsers = async () => {
-      const u = await fetchUsers()
-      setUsers(u)
+      const fetchedUsers = await fetchUsers();
+        const currentUser = fetchedUsers.find(u => u._id === user.id)
+
+        if (currentUser) {
+            const filteredUsers = fetchedUsers.filter(u => u._id !== user.id)
+            setUsers(filteredUsers)
+        } else {
+            console.log("Error")
+        }
     }
 
     getUsers()

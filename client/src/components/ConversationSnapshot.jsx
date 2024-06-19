@@ -7,11 +7,12 @@ import { UserContext } from '../services/AuthContext';
 const ConversationSnapshot = ({conversation, message}) => {
   const navigate = useNavigate();
   const [senderName, setSenderName] = useState("")
+  const [conversationName, setConversationName] = useState("")
   const [timestamp, setTimestamp] = useState('');
-  const [user] = useContext(UserContext)
+  const [currentUser] = useContext(UserContext)
   const [messageText, setMessageText] = useState('')
 
-  console.log(message)
+  // console.log(conversation)
   
 
   const handleClick = () => {
@@ -28,20 +29,30 @@ const ConversationSnapshot = ({conversation, message}) => {
     const data = await res.json();
 
 
-    const userNames = data.user.map((user) => {
+    data.user.map((user) => {
       if (user._id === message.sender){
         setSenderName(user.name)
       }
     })
 
-    // const conversationName = data.user.map((user) => {
-    //   if (user._id === conversation.userOne){
-    //     setConversationName(conversation.userTwo)
-    //   } else if (user._id === conversation.userTwo) {
-    //     setConversationName(conversation.userOne)
-    //   }
-    // })
+
+    data.user.map(user => {
+      if (currentUser.id === conversation.userOne){
+        if (user._id === conversation.userTwo){
+          setConversationName(user.name)
+        }
+      } else {
+        if (user._id === conversation.userOne){
+          setConversationName(user.name)
+        }
+
+      }
+    })  
+
+
     
+
+
   };
 
 
@@ -78,7 +89,7 @@ const ConversationSnapshot = ({conversation, message}) => {
         <div className='snapshot-content'>
             <img src={profilePicture} alt='profile' className='snapshot-profile-image'/>
             <div className='snapshot-first-row'>
-                <p className='snapshot-last-user'>{"senderName"}</p>
+                <p className='snapshot-last-user'>{conversationName}</p>
                 <p className='snapshot-last-message'>{senderName}: {message.message}</p>
             </div>
             <div className='snapshot-second-row'>
