@@ -119,7 +119,7 @@ app.get("/", (req, res) => {
 
 
 app.get('/api/users', async (req, res, next) => {  
-    const userList = await User.find({}, 'name email _id')
+    const userList = await User.find({}, 'name email _id profilePictureID')
 
     res.status(200).json({
         message: "Success",
@@ -260,6 +260,24 @@ app.delete(`/api/conversation/:conversationId/messages`, async (req, res, next) 
         next(err)
     }
 })
+
+
+app.get(`/api/conversation/:conversationId`, async (req, res, next) => {
+    try {
+        const { conversationId } = req.params
+
+        const currentConversation = await Conversation.find({
+            _id: { $in: conversationId }
+        }) 
+
+        res.status(200).json(currentConversation)
+
+        
+    } catch (err) {
+        next(err)
+    }
+})
+
 
 app.put('/api/conversation/:conversationId/messages/:messageId', async (req, res, next) => {
     

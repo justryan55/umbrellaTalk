@@ -28,7 +28,7 @@ const ConversationSnapshot = ({conversation, message}) => {
     });
     const data = await res.json();
 
-
+    console.log(data)
     data.user.map((user) => {
       if (user._id === message.sender){
         setSenderName(user.name)
@@ -48,11 +48,6 @@ const ConversationSnapshot = ({conversation, message}) => {
 
       }
     })  
-
-
-    
-
-
   };
 
 

@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import profilePicture from '../assets/images/profile-picture.png'
+import { UserContext } from '../services/AuthContext'
 
 export default function MessageSnapshot({messageDetails, own}) {
   const [message, setMessage] = useState('')
+  const [user] = useContext(UserContext)
   const [isEditing, setIsEditing] = useState(false)
   const timestamp = messageDetails.createdAt
   const currentURL = window.location.pathname
   const currentURLSplit = currentURL.split('/')
   const conversationId = currentURLSplit[2]
+  const [altUserId, setAltUserId] = useState('')
+  const [altUserProfileId, setAltUserProfileId] = useState('')
 
   const handleEditClick = () => {
     setIsEditing(true)
@@ -47,6 +51,37 @@ export default function MessageSnapshot({messageDetails, own}) {
     }
   }
 
+  const getAltUserProfileImage = async () => {
+    const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}`, {
+      method: "GET", 
+      headers: {'Content-Type': 'application/json'}
+    });
+    const data = await res.json();
+
+    if (user.id === data[0].userOne){
+      setAltUserId(data[0].userTwo)
+    } else {
+      setAltUserId(data[0].userOne)
+    }
+
+    const userList = await fetch("http://localhost:5000/api/users", {
+          method: "GET", 
+          headers: {'Content-Type': 'application/json'}
+        });
+    
+    const userData = await userList.json();
+
+    userData.user.map(u => {
+      if (u._id === altUserId){
+        setAltUserProfileId(u.profilePictureID)
+      }
+    })
+  };
+
+  console.log(user)
+  console.log(altUserProfileId)
+
+  getAltUserProfileImage()
 
   useEffect(() => {
       setMessage(messageDetails.message)
@@ -56,7 +91,7 @@ export default function MessageSnapshot({messageDetails, own}) {
     <div className={own ? 'outgoing-message' : 'incoming-message'}>
         {messageDetails && (
             <div className='message-top'>
-                <img className='message-img' src={profilePicture} alt='' />
+                <img className='message-img' src={own ? `/avatars/${user.profilePictureID}.svg` : `/avatars/${altUserProfileId}.svg`} alt='' />
                 <div className='message-text-container'>
                   {isEditing ? (
                     <textarea
