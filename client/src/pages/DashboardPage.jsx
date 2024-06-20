@@ -3,11 +3,10 @@ import { UserContext } from "../services/AuthContext.jsx"
 import NavigationBar from "../components/NavigationBar.jsx"
 import HeaderBar from "../components/HeaderBar.jsx"
 import FetchConversationList from "../components/FetchConversationList.jsx"
-import ConversationApp from "../components/ConversationApp.jsx"
+import MessengerApp from "../components/MessengerApp.jsx"
 
 export default function DashboardPage() {
   const [user, setUser] = useContext(UserContext)
-
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
@@ -19,10 +18,8 @@ export default function DashboardPage() {
     
     return () => {
       window.removeEventListener('resize', handleResize);
-    };
-    }, []);
-
-
+    }
+    }, [])
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'))
@@ -39,7 +36,6 @@ export default function DashboardPage() {
     }
   }, [])
 
-
   useEffect(() => {
     localStorage.setItem('user', JSON.stringify(user))
   }, [user])
@@ -54,7 +50,7 @@ export default function DashboardPage() {
         ) : (
         <div className={`content-container ${isMobile ? "mobile" : "desktop"}`}>
           <FetchConversationList />
-          {!isMobile && <ConversationApp />}
+          {!isMobile && <MessengerApp />}
         </div>
       )}
         <NavigationBar />

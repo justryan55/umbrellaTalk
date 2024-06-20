@@ -1,4 +1,4 @@
-import PageHeader from '../components/WelcomeLoginRegisterPageHeader'
+import WelcomePageText from '../components/WelcomePageText'
 import AuthForm from '../components/AuthForm'
 import Rain from '../components/Rain'
 import { useNavigate } from 'react-router'
@@ -20,7 +20,7 @@ export default function LoginPage() {
       <div className='container'>
         <div className='section-container'>
           <div>
-              <PageHeader action={"register"} />
+              <WelcomePageText action={"register"} />
               <AuthForm action={"register"} />
           </div>
         </div>

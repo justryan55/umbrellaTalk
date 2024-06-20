@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 5000;
+const port = 5000
 const session = require("express-session")
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
@@ -11,7 +11,6 @@ const { body, validationResult } = require("express-validator")
 const User = require("./models/User.cjs")
 const Conversation = require("./models/Conversation.cjs")
 const Message = require("./models/Message.cjs")
-
 
 dotenv.config()
 const mongoDB = process.env.MONGO_URL
@@ -33,7 +32,7 @@ app.use(cors({
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
-  }));
+  }))
 
 app.post("/api/auth/register", [
     body('name').trim().notEmpty().withMessage('Name is required').escape(),
@@ -57,16 +56,34 @@ app.post("/api/auth/register", [
             email: req.body.email,
             password: hashedPassword,
             profilePictureID: "2"
-        });
+        })
 
-        const userInsert = await user.save();
+        const userInsert = await user.save()
 
         if(userInsert.errors) {
             return res.status(500).json({
                 status: false,
                 message: userInsert.errors,
-            });
+            })
         }
+
+        const payload = {
+            name: user.name,
+            email: user.email,
+            password: user.password,
+        }
+
+        const secretKey = process.env.SECRET_KEY
+        const token = jwt.sign(payload, secretKey, { expiresIn: '1d'} )
+    
+        res.status(200).json({
+            message: "User is registered and logged in",
+            token: token,
+            userName: payload.name,
+            userEmail: payload.email,
+            userId: user._id,
+            profilePictureID: user.profilePictureID
+        })
 
         return res.status(200).json({
             status: true,
@@ -76,7 +93,7 @@ app.post("/api/auth/register", [
     } catch(err) {
         return next(err)
     }
-});
+})
 
 app.post('/api/auth/login', async (req, res, next) => {
     const { email, password } = req.body
@@ -213,10 +230,10 @@ app.get('/api/:userId/conversation', async (req, res, next ) => {
                 _id: "$conversationId",
                 latestMessage: { $first: "$$ROOT" }
             }},
-        ]);
+        ])
 
         const conversationWithLatestMessage = await existingConversations.map(conversation => {
-            const latestMessage = latestMessages.find(message => message._id === conversation.id);
+            const latestMessage = latestMessages.find(message => message._id === conversation.id)
 
             return {
                 conversation: conversation,
@@ -235,7 +252,7 @@ app.get('/api/:userId/conversation', async (req, res, next ) => {
 
 app.post('/api/conversation/:conversationId/messages', async (req, res, next) => {
     try {
-        const { conversationId } = req.params;
+        const { conversationId } = req.params
         const message = new Message({
             conversationId: req.body.conversationId,
             sender: req.body.sender,
@@ -310,7 +327,7 @@ app.delete('/api/conversation/:conversationId/messages/:messageId', async (req, 
 
 app.get('/api/conversation/:conversationId/messages', async (req, res, next) => {
     try {
-        const { conversationId } = req.params;
+        const { conversationId } = req.params
         const messages = await Message.find({ conversationId: conversationId})
         res.status(200).json(messages)
     } catch (err) {

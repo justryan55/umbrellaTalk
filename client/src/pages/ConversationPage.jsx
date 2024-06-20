@@ -1,11 +1,9 @@
 import { useEffect } from "react"
-import ConversationApp from "../components/ConversationApp.jsx"
+import MessengerApp from "../components/MessengerApp.jsx"
 import NavigationBar from "../components/NavigationBar.jsx"
 import HeaderBar from "../components/HeaderBar.jsx"
 
-
 export default function ConversationPage() {
-
   useEffect(() => {
     document.body.style.backgroundColor = "#fff"
 
@@ -19,7 +17,7 @@ export default function ConversationPage() {
       <div className="header-bar-container">  
         <HeaderBar page={"conversation"} />
       </div>
-      <ConversationApp />
+      <MessengerApp />
       <div className="navigation-bar-container">
         <NavigationBar />
       </div>

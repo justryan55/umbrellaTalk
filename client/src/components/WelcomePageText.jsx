@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types"
 
-export default function WeclomePageHeader({action}) {
+export default function WelcomePageText({ action }) {
     return (
         <div className="welcome-page-header-container">
           <div className="welcome-page-header-content">
@@ -30,6 +31,8 @@ export default function WeclomePageHeader({action}) {
         </div>
     )
   }
-  
-  
+
+WelcomePageText.propTypes = {
+  action: PropTypes.string.isRequired
+}
   

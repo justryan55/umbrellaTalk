@@ -1,19 +1,18 @@
-
 import NavigationBar from "../components/NavigationBar.jsx"
 import HeaderBar from "../components/HeaderBar.jsx"
 import { useContext, useEffect, useState } from "react"
-import { fetchUsers } from "../services/helpers.jsx";
-import UserList from "../components/UserList.jsx";
-import { UserContext } from "../services/AuthContext.jsx";
-
+import { fetchUsers } from "../services/helpers.jsx"
+import UserList from "../components/UserList.jsx"
+import { UserContext } from "../services/AuthContext.jsx"
 
 export default function ContactPage() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([])
   const [user] = useContext(UserContext)
 
   useEffect(() => {
     const getUsers = async () => {
-      const fetchedUsers = await fetchUsers();
+      try {   
+        const fetchedUsers = await fetchUsers()
         const currentUser = fetchedUsers.find(u => u._id === user.id)
 
         if (currentUser) {
@@ -22,6 +21,9 @@ export default function ContactPage() {
         } else {
             console.log("Error")
         }
+      } catch(err){
+        console.log("Error fetching users:", err)
+      }
     }
 
     getUsers()
@@ -41,9 +43,12 @@ export default function ContactPage() {
       
       <div className="user-list-container">
             {users.map((user) => {
-            return (
-                <UserList key={user.email} user={[user.name, user._id, user.profilePictureID]} icon={false} />
-            )
+              return (
+                  <UserList key={user.email} 
+                            user={[user.name, user._id, user.profilePictureID]} 
+                            icon={false} 
+                  />
+              )
             })}
         </div>
 

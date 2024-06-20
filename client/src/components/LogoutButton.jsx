@@ -1,12 +1,9 @@
-import { Link } from "react-router-dom";
-import logoutIcon from '../assets/images/logout.svg'
-import { useContext } from "react";
-import { AuthenticationContext, UserContext } from "../services/AuthContext";
+import { useContext } from "react"
+import { AuthenticationContext } from "../services/AuthContext"
 import { useNavigate } from 'react-router'
 
 export default function LogoutButton() {
     const [isAuthenticated, setIsAuthenticated] = useContext(AuthenticationContext)
-    const [user, setUser] = useContext(UserContext)
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
 
@@ -38,6 +35,5 @@ export default function LogoutButton() {
         <polyline points="16 17 21 12 16 7"></polyline>
         <line x1="21" y1="12" x2="9" y2="12"></line>
     </svg>  
-
-)
+    )
 }

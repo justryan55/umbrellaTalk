@@ -1,4 +1,4 @@
-import PageHeader from '../components/WelcomeLoginRegisterPageHeader'
+import WelcomePageText from '../components/WelcomePageText'
 import LoginRegisterButton from '../components/LoginRegisterButton'
 import Rain from '../components/Rain'
 import { useNavigate } from 'react-router'
@@ -20,7 +20,7 @@ export default function WelcomePage() {
       <Rain />
       <div className='container'>
         <div className='section-container'>
-          <PageHeader action={"welcome"} />
+          <WelcomePageText action={"welcome"} />
           <div className='welcome-page-action-btn-container'>
             <Link to='/login' style={{textDecoration: 'none', width: '100%'}}><LoginRegisterButton action={"login"}/></Link>
             <Link to='/register'style={{textDecoration: 'none', width: '100%'}}><LoginRegisterButton action={"register"}/></Link>

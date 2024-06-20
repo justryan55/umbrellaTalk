@@ -8,8 +8,6 @@ export const ProtectedRoute = ({ children }) => {
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
 
-    
-
     const isTokenExpired = (token) => {
       if (!token){
         return true

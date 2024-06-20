@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../services/AuthContext"
-import CreateNewMessage from "./CreateNewMessage"
+import NewConversationIcon from "./NewConversationIcon"
 import { useNavigate } from "react-router"
-import PropTypes from "prop-types"; 
+import PropTypes from "prop-types"
 
-
-export default function HeaderBar({page}) {
+export default function HeaderBar({ page }) {
     const [user] = useContext(UserContext)
     const navigate = useNavigate()
     const currentURL = window.location.pathname
@@ -13,7 +12,6 @@ export default function HeaderBar({page}) {
     const conversationId = currentURLSplit[2]
     const [altUserId, setAltUserId] = useState('')
     const [altUserName, setAltUserName] = useState('')
-
   
     const handleBackClick = () => {
       navigate('/dashboard')
@@ -25,53 +23,48 @@ export default function HeaderBar({page}) {
           method: "DELETE"
         })
         navigate('/dashboard')
-
       } catch (err) {
-        console.log("There has been an error:", err)
+        console.log("Error deleting conversation:", err)
       }
     }
 
-    
-
     useEffect(() => {
-      const getAltUser = async () => {
+      const fetchAltUser = async () => {
         try {
-        const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}`, {
-          method: "GET", 
-          headers: {'Content-Type': 'application/json'}
-        });
-        const data = await res.json();
-    
-        if (user.id === data[0].userOne){
-          setAltUserId(data[0].userTwo)
-        } else {
-          setAltUserId(data[0].userOne)
-        }
-  
-   
-        const userList = await fetch("http://localhost:5000/api/users", {
-              method: "GET", 
-              headers: {'Content-Type': 'application/json'}
-            });
-        
-        const userData = await userList.json();
-          
-        userData.user.map(u => {
-          if (u._id === altUserId){
-            setAltUserName(u.name)
+          const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}`, {
+            method: "GET", 
+            headers: {'Content-Type': 'application/json'}
+          });
+          const data = await res.json();
+      
+          if (user.id === data[0].userOne){
+            setAltUserId(data[0].userTwo)
+          } else {
+            setAltUserId(data[0].userOne)
           }
-        })
-      } catch (err){
-        console.log(err)
+
+          const userList = await fetch("http://localhost:5000/api/users", {
+                method: "GET", 
+                headers: {'Content-Type': 'application/json'}
+              });
+          
+          const userData = await userList.json()
+            
+          userData.user.map(u => {
+            if (u._id === altUserId){
+              setAltUserName(u.name)
+            }
+          })
+        } catch (err){
+            console.log("Error fetching alt user:", err)
+        }
       }
-      };
 
       if (page === "conversation") {
-        getAltUser();
+        fetchAltUser();
       }
     }, [conversationId, page, user.id, altUserId]);
   
-
   return (
     <div className="header-bar-content">
         {page === "dashboard" ? (
@@ -82,24 +75,24 @@ export default function HeaderBar({page}) {
           <p className="header-text" onClick={handleBackClick}>Account Settings</p>
         ) : (
           <svg xmlns="http://www.w3.org/2000/svg" 
-               width="24" 
-               height="24" 
-               viewBox="0 0 24 24" 
-               fill="none" 
-               stroke="white" 
-               strokeWidth="2" 
-               strokeLinecap="round" 
-               strokeLinejoin="round" 
-               className="back-icon"
-               onClick={handleBackClick}
-               >
-               <polyline points="15 18 9 12 15 6"></polyline>
+              width="24" 
+              height="24" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="white" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              className="back-icon"
+              onClick={handleBackClick}
+              >
+              <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
         )
       }
       {page === "conversation" ? `Chatting with ${altUserName}` : ""}
-        {page === "dashboard" ? (
-        <CreateNewMessage />
+      {page === "dashboard" ? (
+        <NewConversationIcon />
       ) : page === "conversation" ? (
         <svg xmlns="http://www.w3.org/2000/svg" 
              width="24" 

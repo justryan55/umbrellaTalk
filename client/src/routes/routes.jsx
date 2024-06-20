@@ -10,8 +10,6 @@ import AccountPage from "../pages/AccountPage"
 
 
 const AppRouter = () => {
-
-    const token = localStorage.getItem('token')
     const router = createBrowserRouter([
         {
             path: "/",
@@ -31,21 +29,19 @@ const AppRouter = () => {
         },
         {
             path: "/contacts",
-            element: <ContactPage />
+            element: <ProtectedRoute><ContactPage /></ProtectedRoute>,
         },
         {
             path: "/account",
-            element: <AccountPage />
+            element: <ProtectedRoute><AccountPage /></ProtectedRoute>,
         },
         {
             path: "/conversation/:conversationId",
-            element: <ConversationPage />
+            element: <ProtectedRoute><ConversationPage /></ProtectedRoute>
         }
-        
     ])
-    
-    return router
 
+    return router
 }
 
 

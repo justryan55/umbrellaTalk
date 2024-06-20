@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../services/AuthContext'
-import PropTypes from "prop-types"; 
+import PropTypes from "prop-types"
 
 export default function MessageSnapshot({messageDetails, own}) {
   const [message, setMessage] = useState('')
@@ -51,34 +51,38 @@ export default function MessageSnapshot({messageDetails, own}) {
     }
   }
 
-  const getAltUserProfileImage = async () => {
-    const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}`, {
-      method: "GET", 
-      headers: {'Content-Type': 'application/json'}
-    });
-    const data = await res.json();
+  const fetchAltUserProfileImage = async () => {
+    try {
+      const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}`, {
+        method: "GET", 
+        headers: {'Content-Type': 'application/json'}
+      });
+      const data = await res.json()
 
-    if (user.id === data[0].userOne){
-      setAltUserId(data[0].userTwo)
-    } else {
-      setAltUserId(data[0].userOne)
-    }
-
-    const userList = await fetch("http://localhost:5000/api/users", {
-          method: "GET", 
-          headers: {'Content-Type': 'application/json'}
-        });
-    
-    const userData = await userList.json();
-
-    userData.user.map(u => {
-      if (u._id === altUserId){
-        setAltUserProfileId(u.profilePictureID)
+      if (user.id === data[0].userOne){
+        setAltUserId(data[0].userTwo)
+      } else {
+        setAltUserId(data[0].userOne)
       }
-    })
-  };
 
-  getAltUserProfileImage()
+      const userList = await fetch("http://localhost:5000/api/users", {
+            method: "GET", 
+            headers: {'Content-Type': 'application/json'}
+          });
+      
+      const userData = await userList.json();
+
+      userData.user.map(u => {
+        if (u._id === altUserId){
+          setAltUserProfileId(u.profilePictureID)
+        }
+      })
+    } catch(err){
+      console.log("Error fetching alt user profile image", err)
+    }
+  }
+
+  fetchAltUserProfileImage()
 
   useEffect(() => {
       setMessage(messageDetails.message)
@@ -86,66 +90,64 @@ export default function MessageSnapshot({messageDetails, own}) {
 
   return (
     <div className={own ? 'outgoing-message' : 'incoming-message'}>
-        {messageDetails && (
-            <div className='message-top'>
-                <img className='message-img' src={own ? `/avatars/${user.profilePictureID}.svg` : `/avatars/${altUserProfileId}.svg`} alt='' />
-                <div className='message-text-container'>
-                  {isEditing ? (
-                    <textarea
-                      value={message}
-                      onChange={handleTextAreaChange}
-                      onKeyDown={handleTextAreaKeyDown}
-                      className='edit-text-area'
-                      onBlur={() => setIsEditing(false)}
-                      autoFocus
-                    />
-                  ) : (
-                    <p className={message === "This message has been deleted" ? "message-text deleted-message" : "message-text"}>{message}</p>
-                  )}
-                  {own && !isEditing && message !== "This message has been deleted" && ( 
-                  <div className='icon-container'>
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                         width="24" 
-                         height="24" 
-                         viewBox="0 0 24 24" 
-                         fill="none" 
-                         stroke="black" 
-                         strokeWidth="2" 
-                         strokeLinecap="round" 
-                         strokeLinejoin="round" 
-                         className="bin-icon"
-                         onClick={handleDeleteMessageClick}>
-                         <polyline points="3 6 5 6 21 6"></polyline>
-                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                    </svg>
+      {messageDetails && (
+        <div className='message-top'>
+          <img className='message-img' src={own ? `/avatars/${user.profilePictureID}.svg` : `/avatars/${altUserProfileId}.svg`} alt='' />
+          <div className='message-text-container'>
+            {isEditing ? (
+              <textarea
+                value={message}
+                onChange={handleTextAreaChange}
+                onKeyDown={handleTextAreaKeyDown}
+                className='edit-text-area'
+                onBlur={() => setIsEditing(false)}
+                autoFocus
+              />
+            ) : (
+              <p className={message === "This message has been deleted" ? "message-text deleted-message" : "message-text"}>{message}</p>
+            )}
+            {own && !isEditing && message !== "This message has been deleted" && ( 
+            <div className='icon-container'>
+              <svg xmlns="http://www.w3.org/2000/svg" 
+                    width="24" 
+                    height="24" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="black" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className="bin-icon"
+                    onClick={handleDeleteMessageClick}>
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
 
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                          width="24" 
-                          height="24" 
-                          viewBox="0 0 24 24" 
-                          fill="none" 
-                          stroke="black" 
-                          strokeWidth="2" 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                          className="edit-icon"
-                          onClick={handleEditClick}
-                          >
-                          <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                    </svg> 
-                  </div>
-                  )}
-                </div>
+              <svg xmlns="http://www.w3.org/2000/svg" 
+                    width="24" 
+                    height="24" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="black" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className="edit-icon"
+                    onClick={handleEditClick}>
+                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+              </svg> 
+            </div>
+            )}
           </div>
-        )}
-      
-        {messageDetails && messageDetails.length > 0 && (
-          <div className='message-bottom-timestamp'>{timestamp}</div>
-        )}
+        </div>
+      )}
+    
+      {messageDetails && messageDetails.length > 0 && (
+        <div className='message-bottom-timestamp'>{timestamp}</div>
+      )}
     </div>
   )
 }
-
 
 MessageSnapshot.propTypes = {
   messageDetails: PropTypes.shape({

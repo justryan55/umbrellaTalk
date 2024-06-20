@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import LogoutButton from './LogoutButton'
 
-
 const NavigationBar = () => {
   return (
     <div className='navigation-bar'>

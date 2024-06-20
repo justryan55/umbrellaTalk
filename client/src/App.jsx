@@ -1,5 +1,4 @@
 import './assets/styles/App.css'
-// import WelcomePage from './pages/WelcomePage'
 
 function App() {
 
