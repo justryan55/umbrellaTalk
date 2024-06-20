@@ -61,7 +61,6 @@ export default function AuthForm({ action }) {
     <div className="auth-form-container">
       <div className="auth-form-content">
             <form className="auth-form" 
-                  // action={action === "login" ? "/api/auth/login" : action === "register" ? "/api/auth/register" : ""}
                   onSubmit={handleSubmit}>
                     
               {action === "register" ? 
