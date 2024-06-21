@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router'
 import LoginRegisterButton from './LoginRegisterButton'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { AuthenticationContext, UserContext } from '../services/AuthContext'
 import PropTypes from "prop-types"
 
@@ -9,12 +9,21 @@ export default function AuthForm({ action }) {
 
   const [isAuthenticated, setIsAuthenticated] = useContext(AuthenticationContext)
   const [user, setUser] = useContext(UserContext)
+  const [error, setError] = useState(null)
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     const formData = new FormData(e.target)
     const payload = Object.fromEntries(formData)
+
+    setError(null)
+
+    if (action === 'register' && payload.password !== payload['confirm-password']) {
+      setError('Passwords do not match.');
+      return;
+    }
 
     const params = {
       method: 'GET',
@@ -62,6 +71,8 @@ export default function AuthForm({ action }) {
             localStorage.setItem('user', JSON.stringify(userDetails))
             navigate('/dashboard')
             return 
+          } else {
+              setError('Incorrect credentials.');
           }
     }
   }
@@ -140,6 +151,9 @@ export default function AuthForm({ action }) {
             </div>
           : ""
           }
+
+          {error && <p className="error-message">{error}</p>}
+
           <div>
             <LoginRegisterButton action={action} />
           </div>

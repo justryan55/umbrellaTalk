@@ -29,3 +29,12 @@
         transform: translateY(calc(100vh + 200px));
     }
 }
+
+
+
+@media screen and (max-width: 767px){
+    .rain-drops {
+        all: unset;
+        display: none;
+    }   
+}

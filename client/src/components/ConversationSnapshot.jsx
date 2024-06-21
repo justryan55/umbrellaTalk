@@ -87,7 +87,7 @@ const ConversationSnapshot = ({ conversation, message }) => {
         />
         <div className='snapshot-first-column'>
             <p className='snapshot-conversation-name'>{conversationName}</p>
-            {senderName ? <p className='snapshot-last-message'>{senderName}: {message.message}</p> : ""}
+            {senderName ? <p className='snapshot-last-message'>{senderName}: {message.message}</p> : <p className='snapshot-last-message'>No messages</p>}
         </div>
         <div className='snapshot-second-column'>
             {senderName ? <p className='snapshot-timestamp'>{timestamp}</p> : ""}
@@ -106,12 +106,7 @@ ConversationSnapshot.propTypes = {
     _id: PropTypes.string.isRequired,
     userOne: PropTypes.string.isRequired,
     userTwo: PropTypes.string.isRequired,
-  }).isRequired,
-  message: PropTypes.shape({
-    sender: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired,
-  }).isRequired,
+  }).isRequired
 };
 
 export default ConversationSnapshot
