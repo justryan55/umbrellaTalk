@@ -5,7 +5,7 @@ import { fetchUsers } from "../services/helpers.jsx"
 import UserList from "../components/UserList.jsx"
 import { UserContext } from "../services/AuthContext.jsx"
 
-export default function ContactPage() {
+export default function ContactsPage() {
   const [users, setUsers] = useState([])
   const [user] = useContext(UserContext)
 

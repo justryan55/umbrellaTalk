@@ -5,7 +5,7 @@ import RegisterPage from "../pages/RegisterPage"
 import DashboardPage from "../pages/DashboardPage"
 import ConversationPage from "../pages/ConversationPage"
 import { ProtectedRoute } from "../pages/ProtectedRoute"
-import ContactPage from "../pages/ContactPage"
+import ContactsPage from "../pages/ContactsPage"
 import AccountPage from "../pages/AccountPage"
 
 
@@ -29,7 +29,7 @@ const AppRouter = () => {
         },
         {
             path: "/contacts",
-            element: <ProtectedRoute><ContactPage /></ProtectedRoute>,
+            element: <ProtectedRoute><ContactsPage /></ProtectedRoute>,
         },
         {
             path: "/account",
