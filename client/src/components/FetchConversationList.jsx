@@ -5,6 +5,7 @@ import { UserContext } from '../services/AuthContext'
 export default function FetchConversationList() {
     const [user] = useContext(UserContext)
     const [conversationListComponent, setConversationListComponent] = useState()
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
       const fetchConversationList = async () => {
@@ -32,17 +33,18 @@ export default function FetchConversationList() {
             )
   
           setConversationListComponent(conversationHistory)
+          setIsLoading(false)
         } catch (err) {
           console.log("Error fetching list:", err)
         }}
         
         fetchConversationList()
  
-    }, [user])
+    }, [user, conversationListComponent])
 
   return (
     <div>
-        {conversationListComponent}
+        {isLoading ? <p className='loading-text'>Loading conversations...</p> : conversationListComponent}
     </div>
   )
 }

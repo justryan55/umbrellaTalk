@@ -6,7 +6,7 @@ export default function MessageSnapshot({messageDetails, own}) {
   const [message, setMessage] = useState('')
   const [user] = useContext(UserContext)
   const [isEditing, setIsEditing] = useState(false)
-  const timestamp = messageDetails.createdAt
+  const [timestamp, setTimestamp] = useState('')
   const currentURL = window.location.pathname
   const currentURLSplit = currentURL.split('/')
   const conversationId = currentURLSplit[2]
@@ -51,6 +51,24 @@ export default function MessageSnapshot({messageDetails, own}) {
     }
   }
 
+  const formatTimestamp = (timestamp) => {
+    const current = new Date()
+    const provided = new Date(timestamp)
+    const timeDifference = current - provided
+    const minutes = Math.floor(timeDifference / (1000 * 60))
+    const hours = Math.floor(timeDifference / (1000 * 60 * 60))
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
+
+    if (minutes < 60) {
+      return `${minutes} minute${minutes === 1 ? '' : 's'} ago`
+    } else if (hours < 24) {
+      return `${hours} hour${hours === 1 ? '' : 's'} ago`
+    } else {
+      return `${days} day${days === 1 ? '' : 's'} ago`
+    }
+  }
+
+
   const fetchAltUserProfileImage = async () => {
     try {
       const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}`, {
@@ -86,7 +104,8 @@ export default function MessageSnapshot({messageDetails, own}) {
 
   useEffect(() => {
       setMessage(messageDetails.message)
-  }, [messageDetails])
+      setTimestamp(formatTimestamp(messageDetails.createdAt))
+  }, [messageDetails, messageDetails.createdAt])
 
   return (
     <div className={own ? 'outgoing-message' : 'incoming-message'}>
@@ -141,8 +160,7 @@ export default function MessageSnapshot({messageDetails, own}) {
           </div>
         </div>
       )}
-    
-      {messageDetails && messageDetails.length > 0 && (
+      {messageDetails && (
         <div className='message-bottom-timestamp'>{timestamp}</div>
       )}
     </div>
@@ -154,7 +172,6 @@ MessageSnapshot.propTypes = {
     _id: PropTypes.string.isRequired, 
     message: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
-    length: PropTypes.number.isRequired, 
   }).isRequired,
   own: PropTypes.bool.isRequired
 }

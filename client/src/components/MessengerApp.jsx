@@ -58,7 +58,7 @@ export default function MessengerApp() {
     <div className='conversation-app-container'>
       <div className='conversation-content'>
         <div className='conversation-app-top'>
-          {isLoading ? (<p className='loading-messages-text'>Loading messages...</p>) 
+          {isLoading ? (<p className='loading-text'>Loading messages...</p>) 
           : (messages.map((message) => {
             return (
               <IndividualMessage 
