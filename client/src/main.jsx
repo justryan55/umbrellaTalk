@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import './assets/styles/index.css'
 import { RouterProvider } from 'react-router-dom'
 import AppRouter from '../src/routes/routes.jsx'; 
 import { AuthContext } from './services/AuthContext.jsx'

@@ -12,6 +12,7 @@ export default function HeaderBar({ page }) {
     const conversationId = currentURLSplit[2]
     const [altUserId, setAltUserId] = useState('')
     const [altUserName, setAltUserName] = useState('')
+    const [isLoading, setIsLoading] = useState(true)
   
     const handleBackClick = () => {
       navigate('/dashboard')
@@ -53,6 +54,7 @@ export default function HeaderBar({ page }) {
           userData.user.map(u => {
             if (u._id === altUserId){
               setAltUserName(u.name)
+              setIsLoading(false)
             }
           })
         } catch (err){
@@ -90,7 +92,7 @@ export default function HeaderBar({ page }) {
           </svg>
         )
       }
-      {page === "conversation" ? `Chatting with ${altUserName}` : ""}
+      {page === "conversation" && isLoading ? 'Loading...' : page === "conversation" && !isLoading ? `Chatting with ${altUserName}` : ""}
       {page === "dashboard" ? (
         <NewConversationIcon />
       ) : page === "conversation" ? (

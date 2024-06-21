@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router'
 import LoginRegisterButton from './LoginRegisterButton'
 import { useContext } from 'react'
 import { AuthenticationContext, UserContext } from '../services/AuthContext'
+import PropTypes from "prop-types"
 
 export default function AuthForm({ action }) {
   const navigate = useNavigate()
@@ -124,7 +125,7 @@ export default function AuthForm({ action }) {
           
           {action === "register" ? 
             <div>
-              <div>
+              <div className="flex items-center justify-between">
                 <label htmlFor="confirm-password" className="auth-form-label">Confirm Password</label>
               </div>
               <div>
@@ -146,4 +147,8 @@ export default function AuthForm({ action }) {
       </div>
     </div>
   )
+}
+
+AuthForm.propTypes = {
+  action: PropTypes.string.isRequired
 }

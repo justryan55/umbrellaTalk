@@ -4,6 +4,7 @@ import IndividualMessage from './IndividualMessage'
 export default function MessengerApp() {
   const [message, setMessage] = useState("")
   const [messages, setMessages] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   const currentUserString = localStorage.getItem('user')
   const currentUser = JSON.parse(currentUserString).id
@@ -44,11 +45,11 @@ export default function MessengerApp() {
     if (res.ok){
       const data = await res.json()
       setMessages(data)
+      setIsLoading(false)
     }
   }
 
   useEffect(() => {
-    console.log("Fetching messages...")
     setMessages([])
     fetchMessages()
   }, [conversationId])
@@ -57,7 +58,8 @@ export default function MessengerApp() {
     <div className='conversation-app-container'>
       <div className='conversation-content'>
         <div className='conversation-app-top'>
-          {messages.map((message) => {
+          {isLoading ? (<p className='loading-messages-text'>Loading messages...</p>) 
+          : (messages.map((message) => {
             return (
               <IndividualMessage 
                 key={message._id} 
@@ -65,7 +67,7 @@ export default function MessengerApp() {
                 own={message.sender === currentUser} 
               />
             );
-          })}
+          }))}
         </div>
 
         {location.pathname === '/dashboard' ? 
