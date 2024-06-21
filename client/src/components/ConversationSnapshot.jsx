@@ -87,14 +87,14 @@ const ConversationSnapshot = ({ conversation, message }) => {
         />
         <div className='snapshot-first-column'>
             <p className='snapshot-conversation-name'>{conversationName}</p>
-            <p className='snapshot-last-message'>{senderName}: {message.message}</p>
+            {senderName ? <p className='snapshot-last-message'>{senderName}: {message.message}</p> : ""}
         </div>
         <div className='snapshot-second-column'>
-            <p className='snapshot-timestamp'>{timestamp}</p>
-            <img src={tick} 
+            {senderName ? <p className='snapshot-timestamp'>{timestamp}</p> : ""}
+            {senderName ? <img src={tick} 
                  alt='sent' 
                  className='snapshot-message-sent-image'
-            />
+            /> : ""}
         </div>
       </div>
     </div>
