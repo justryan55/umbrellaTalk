@@ -2,7 +2,7 @@ import NavigationBar from "../components/NavigationBar.jsx"
 import HeaderBar from "../components/HeaderBar.jsx"
 import { useContext, useEffect, useState } from "react"
 import { fetchUsers } from "../services/helpers.jsx"
-import UserList from "../components/UserList.jsx"
+import FetchUsers from "../components/FetchUsers.jsx"
 import { UserContext } from "../services/AuthContext.jsx"
 
 export default function ContactsPage() {
@@ -44,9 +44,9 @@ export default function ContactsPage() {
       <div className="user-list-container">
             {users.map((user) => {
               return (
-                  <UserList key={user.email} 
-                            user={[user.name, user._id, user.profilePictureID]} 
-                            icon={false} 
+                  <FetchUsers key={user.email} 
+                              user={[user.name, user._id, user.profilePictureID]} 
+                              icon={false} 
                   />
               )
             })}

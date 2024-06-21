@@ -44,12 +44,12 @@ export default function HeaderBar({ page }) {
             setAltUserId(data[0].userOne)
           }
 
-          const userList = await fetch("http://localhost:5000/api/users", {
+          const fetchUsers = await fetch("http://localhost:5000/api/users", {
                 method: "GET", 
                 headers: {'Content-Type': 'application/json'}
               });
           
-          const userData = await userList.json()
+          const userData = await fetchUsers.json()
             
           userData.user.map(u => {
             if (u._id === altUserId){

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router'
 import PropTypes from 'prop-types'
 
-const UserList = ({ user, icon }) => {
+const FetchUsers = ({ user, icon }) => {
   const navigate = useNavigate()
   const currentUserString = localStorage.getItem('user')
   const currentUser = JSON.parse(currentUserString).id
@@ -39,9 +39,9 @@ const UserList = ({ user, icon }) => {
   )
 }
 
-UserList.propTypes = {
+FetchUsers.propTypes = {
   user: PropTypes.array.isRequired,
   icon: PropTypes.bool.isRequired
 }
 
-export default UserList
+export default FetchUsers
