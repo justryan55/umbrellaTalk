@@ -12,7 +12,7 @@ export default function MessengerApp() {
   const currentURL = window.location.pathname
   const currentURLSplit = currentURL.split('/')
   const conversationId = currentURLSplit[2]
-
+  
   const sendMessage = async () => {
     const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}/messages`, {
       method: 'POST',
