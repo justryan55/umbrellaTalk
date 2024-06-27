@@ -90,6 +90,7 @@ export const ProfileSettings = () => {
         setModalIsOpen(false);
     }
 
+    
     const updateProfileAvatar = async (ID) => {
         setUser((prevUser) => ({
             ...prevUser,
