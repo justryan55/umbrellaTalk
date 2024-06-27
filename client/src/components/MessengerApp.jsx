@@ -34,6 +34,13 @@ export default function MessengerApp() {
     setMessage("")
   }
 
+  const handleKeyDown = (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter'){
+      e.preventDefault()
+      sendMessage()
+    }
+  }
+
   const fetchMessages = async () => {
     const res = await fetch(`http://localhost:5000/api/conversation/${conversationId}/messages`, {
       method: "GET",
@@ -79,6 +86,7 @@ export default function MessengerApp() {
                     placeholder='Send your message...' 
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={handleKeyDown}
           />
           <svg xmlns="http://www.w3.org/2000/svg" 
                 width="24" 

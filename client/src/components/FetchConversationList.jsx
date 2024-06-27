@@ -36,11 +36,12 @@ export default function FetchConversationList() {
           setIsLoading(false)
         } catch (err) {
           console.log("Error fetching list:", err)
+          setIsLoading(false)
         }}
         
         fetchConversationList()
  
-    }, [user, conversationListComponent])
+    }, [user])
 
   return (
     <div>

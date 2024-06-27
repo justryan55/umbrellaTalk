@@ -69,7 +69,9 @@ const ConversationSnapshot = ({ conversation, message }) => {
     const hours = Math.floor(timeDifference / (1000 * 60 * 60))
     const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
 
-    if (minutes < 60) {
+    if (minutes === 0) {
+      return "Just now"
+    }  else if (minutes < 60) {
       return `${minutes} minute${minutes === 1 ? '' : 's'} ago`
     } else if (hours < 24) {
       return `${hours} hour${hours === 1 ? '' : 's'} ago`

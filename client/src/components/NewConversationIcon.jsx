@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react"
-import FetchUsers from "./FetchUsers.jsx"
+import ContactListItemComponent from "./ContactListItemComponent.jsx"
 import { UserContext } from "../services/AuthContext.jsx"
 import { fetchUsers } from "../services/helpers.jsx"
 
@@ -54,7 +54,7 @@ export default function NewConversationIcon() {
         <div className="user-list-container">
             {users.map((user) => {
                 return (
-                    <FetchUsers key={user.email} 
+                    <ContactListItemComponent key={user.email} 
                                 user={[user.name, user._id, user.profilePictureID]} 
                                 icon={true}
                     />

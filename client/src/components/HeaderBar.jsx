@@ -72,7 +72,7 @@ export default function HeaderBar({ page }) {
         {page === "dashboard" ? (
           <p className="header-text" onClick={handleBackClick}>Welcome {user.name}</p>
         ) : page === "contacts" ? (
-          <p className="header-text" onClick={handleBackClick}>Contacts</p>
+          <p className="header-text" onClick={handleBackClick}>Create conversation</p>
         ) : page === "settings" ? (
           <p className="header-text" onClick={handleBackClick}>Account Settings</p>
         ) : (

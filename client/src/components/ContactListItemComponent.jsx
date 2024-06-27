@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router'
 import PropTypes from 'prop-types'
 
-const FetchUsers = ({ user, icon }) => {
+const ContactListItemComponent = ({ user, icon }) => {
   const navigate = useNavigate()
   const currentUserString = localStorage.getItem('user')
   const currentUser = JSON.parse(currentUserString).id
@@ -39,9 +39,9 @@ const FetchUsers = ({ user, icon }) => {
   )
 }
 
-FetchUsers.propTypes = {
+ContactListItemComponent.propTypes = {
   user: PropTypes.array.isRequired,
   icon: PropTypes.bool.isRequired
 }
 
-export default FetchUsers
+export default ContactListItemComponent
