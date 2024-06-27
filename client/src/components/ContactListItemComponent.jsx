@@ -8,7 +8,7 @@ const ContactListItemComponent = ({ user, icon }) => {
 
   const navigateToConversation = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/conversation", {
+      const res = await fetch("https://umbrella-talk-api.vercel.app/api/conversation", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

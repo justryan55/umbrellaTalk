@@ -14,7 +14,7 @@ const ConversationSnapshot = ({ conversation, message }) => {
   
   const fetchUserList = useCallback(async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/users", {
+      const res = await fetch("https://umbrella-talk-api.vercel.app/api/users", {
         method: "GET", 
         headers: {
           'Content-Type': 'application/json'

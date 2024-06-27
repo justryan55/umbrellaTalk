@@ -48,7 +48,7 @@ export const ProfileSettings = () => {
 
     const updateUsernameInAPI = async () => {
         try {
-            const res = await fetch(`http://localhost:5000/api/users/${user.id}`, {
+            const res = await fetch(`https://umbrella-talk-api.vercel.app/api/users/${user.id}`, {
                 method: 'PUT', 
                 headers: {
                     'Content-Type': 'application/json'
@@ -67,7 +67,7 @@ export const ProfileSettings = () => {
 
     const handleDeleteClick = async () => {
         try {
-            const res = await fetch(`http://localhost:5000/api/users/${user.id}`, {
+            const res = await fetch(`https://umbrella-talk-api.vercel.app/api/users/${user.id}`, {
                 method: 'DELETE' })
 
             if (res.status === 200){
@@ -97,7 +97,7 @@ export const ProfileSettings = () => {
         }))
 
         try {
-            const res = await fetch(`http://localhost:5000/api/users/${user.id}`, {
+            const res = await fetch(`https://umbrella-talk-api.vercel.app/api/users/${user.id}`, {
                 method: 'PUT', 
                 headers: {
                     'Content-Type': 'application/json'
