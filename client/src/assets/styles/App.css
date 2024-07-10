@@ -75,6 +75,7 @@ body {
 
 .navigation-bar-container {
     margin-top: 50px;
+
 }
 
 .navigation-bar {
@@ -94,6 +95,7 @@ body {
     position: fixed;
     z-index: 1;
     border-radius: 5px 5px 0px 0px; 
+
 }
 
 .nav-icon:hover{
@@ -509,6 +511,11 @@ textarea::placeholder {
     top: 0;
     overflow-y: auto;
 }
+
+.user-list-container .user-list-content:last-child{
+    margin-bottom: 60px
+}
+
 
 .user-list-content {
     display: grid;
