@@ -29,11 +29,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.use(cors({
-    origin: 'https://umbrella-talk-client.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-  }))
+    origin: "https://umbrella-talk-client.vercel.app"
+}))
   
 app.options('*', cors());
 
