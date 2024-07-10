@@ -38,7 +38,7 @@ export default function AuthForm({ action }) {
     }
     
     if (action === "register"){
-      const res = await fetch("https://umbrella-talk-api.vercel.app/api/auth/register", params);
+      const res = await fetch("/api/auth/register", params);
   
       if(res.ok) {
         const { token, userName, userEmail, userId, profilePictureID } = await res.json()  
@@ -57,7 +57,7 @@ export default function AuthForm({ action }) {
     } 
     
     if (action === "login"){
-        const res = await fetch("https://umbrella-talk-api.vercel.app/api/auth/login", params);
+        const res = await fetch("/api/auth/login", params);
           if (res.ok){
             const { token, userName, userEmail, userId, profilePictureID } = await res.json()  
             const userDetails = ({
