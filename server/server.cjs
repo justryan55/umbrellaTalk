@@ -35,6 +35,8 @@ app.use(cors({
     credentials: true
   }))
   
+app.options('*', cors());
+
 app.post("/api/auth/register", [
     body('name').trim().notEmpty().withMessage('Name is required').escape(),
     body('email').isEmail().withMessage('Invalid email').normalizeEmail(),

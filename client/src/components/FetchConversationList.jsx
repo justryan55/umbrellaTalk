@@ -10,7 +10,7 @@ export default function FetchConversationList() {
     useEffect(() => {
       const fetchConversationList = async () => {
         try {
-            const res = await fetch(`https://umbrella-talk-2b5322zw5-ryans-projects-20a8834f.vercel.app/api/${user.id}/conversation`, {
+            const res = await fetch(`https://umbrella-talk-api.vercel.app/api/${user.id}/conversation`, {
               method: "GET",
               headers: {
                 'Content-Type': 'application/json'

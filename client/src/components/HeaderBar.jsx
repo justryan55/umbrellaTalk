@@ -20,7 +20,7 @@ export default function HeaderBar({ page }) {
 
     const deleteConversation = async () => {
       try {
-        await fetch(`https://umbrella-talk-2b5322zw5-ryans-projects-20a8834f.vercel.app/api/conversation/${conversationId}/messages`, {
+        await fetch(`https://umbrella-talk-api.vercel.app/api/conversation/${conversationId}/messages`, {
           method: "DELETE"
         })
         navigate('/dashboard')
@@ -32,7 +32,7 @@ export default function HeaderBar({ page }) {
     useEffect(() => {
       const fetchAltUser = async () => {
         try {
-          const res = await fetch(`https://umbrella-talk-2b5322zw5-ryans-projects-20a8834f.vercel.app/api/conversation/${conversationId}`, {
+          const res = await fetch(`https://umbrella-talk-api.vercel.app/api/conversation/${conversationId}`, {
             method: "GET", 
             headers: {'Content-Type': 'application/json'}
           });
@@ -44,7 +44,7 @@ export default function HeaderBar({ page }) {
             setAltUserId(data[0].userOne)
           }
 
-          const fetchUsers = await fetch("https://umbrella-talk-2b5322zw5-ryans-projects-20a8834f.vercel.app/api/users", {
+          const fetchUsers = await fetch("https://umbrella-talk-api.vercel.app/api/users", {
                 method: "GET", 
                 headers: {'Content-Type': 'application/json'}
               });
