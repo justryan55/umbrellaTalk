@@ -25,6 +25,8 @@ const connectDatabase = async () => {
     }
 }
 
+app.use(express.static('dist'))
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
