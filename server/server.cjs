@@ -29,14 +29,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.use(cors({
-    origin: 'https://umbrella-talk-client-git-deployment-ryans-projects-20a8834f.vercel.app',
+    origin: 'https://umbrella-talk-client.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
   }))
   
-app.options('*', cors());
-
 app.post("/api/auth/register", [
     body('name').trim().notEmpty().withMessage('Name is required').escape(),
     body('email').isEmail().withMessage('Invalid email').normalizeEmail(),
