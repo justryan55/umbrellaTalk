@@ -8,7 +8,7 @@ export const fetchUsers = async () => {
 			body: null,
 		};
 	
-		const res = await fetch("https://umbrella-talk-api.vercel.app/api/users", params) 
+		const res = await fetch("https://umbrella-talk-2b5322zw5-ryans-projects-20a8834f.vercel.app/api/users", params) 
 
 		if (res.status !== 200) {
 			return [];

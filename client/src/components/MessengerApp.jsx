@@ -14,7 +14,7 @@ export default function MessengerApp() {
   const conversationId = currentURLSplit[2]
   
   const sendMessage = async () => {
-    const res = await fetch(`https://umbrella-talk-api.vercel.app/api/conversation/${conversationId}/messages`, {
+    const res = await fetch(`https://umbrella-talk-2b5322zw5-ryans-projects-20a8834f.vercel.app/api/conversation/${conversationId}/messages`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ export default function MessengerApp() {
   }
 
   const fetchMessages = async () => {
-    const res = await fetch(`https://umbrella-talk-api.vercel.app/api/conversation/${conversationId}/messages`, {
+    const res = await fetch(`https://umbrella-talk-2b5322zw5-ryans-projects-20a8834f.vercel.app/api/conversation/${conversationId}/messages`, {
       method: "GET",
       headers: {
         'Content-Type': 'application/json'

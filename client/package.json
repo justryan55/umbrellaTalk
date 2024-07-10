@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "https://umbrella-talk-api.vercel.app/",
+  "proxy": "https://umbrella-talk-2b5322zw5-ryans-projects-20a8834f.vercel.app/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
