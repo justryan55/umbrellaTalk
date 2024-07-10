@@ -24,7 +24,7 @@ export default function MessageSnapshot({messageDetails, own}) {
   const handleTextAreaKeyDown = async (e) => {
     if (e.keyCode === 13){
       try {
-        await fetch(`https://umbrella-talk-api.vercel.app/api/conversation/${conversationId}/messages/${messageDetails._id}`, {
+        await fetch(`/api/conversation/${conversationId}/messages/${messageDetails._id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ export default function MessageSnapshot({messageDetails, own}) {
 
   const handleDeleteMessageClick = async () => {
     try {
-      await fetch (`https://umbrella-talk-api.vercel.app/api/conversation/${conversationId}/messages/${messageDetails._id}`, {
+      await fetch (`/api/conversation/${conversationId}/messages/${messageDetails._id}`, {
         method: 'DELETE'
       })
       setMessage("This message has been deleted")
@@ -73,7 +73,7 @@ export default function MessageSnapshot({messageDetails, own}) {
 
   const fetchAltUserProfileImage = async () => {
     try {
-      const res = await fetch(`https://umbrella-talk-api.vercel.app/api/conversation/${conversationId}`, {
+      const res = await fetch(`/api/conversation/${conversationId}`, {
         method: "GET", 
         headers: {'Content-Type': 'application/json'}
       });
@@ -85,7 +85,7 @@ export default function MessageSnapshot({messageDetails, own}) {
         setAltUserId(data[0].userOne)
       }
 
-      const userList = await fetch("https://umbrella-talk-api.vercel.app/api/users", {
+      const userList = await fetch("/api/users", {
             method: "GET", 
             headers: {'Content-Type': 'application/json'}
           });
