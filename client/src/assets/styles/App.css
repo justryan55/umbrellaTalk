@@ -512,7 +512,7 @@ textarea::placeholder {
     overflow-y: auto;
 }
 
-.user-list-container .user-list-content:last-child{
+.user-list-container .user-list-content-icon:last-child{
     margin-bottom: 60px
 }
 
