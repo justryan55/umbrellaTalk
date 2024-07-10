@@ -516,6 +516,10 @@ textarea::placeholder {
     margin-bottom: 50px
 }
 
+.user-list-container .user-list-content:last-child{
+    margin-bottom: 50px
+}
+
 
 .user-list-content {
     display: grid;
