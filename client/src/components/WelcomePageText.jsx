@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import { AuthenticationContext } from "../services/AuthContext";
 
 export default function WelcomePageText({ action }) {
   const navigate = useNavigate();
-
+  const [isAuthenticated, setIsAuthenticated] = useContext(
+    AuthenticationContext
+  );
   const handleGuestClick = async (e) => {
     e.preventDefault();
 
@@ -27,9 +31,22 @@ export default function WelcomePageText({ action }) {
       },
       guestFormData
     );
-    const data = await res?.json();
-    window.localStorage.setItem("token", data.token);
-    navigate("/home");
+
+    if (res.ok) {
+      const { token, userName, userEmail, userId, profilePictureID } =
+        await res.json();
+      const userDetails = {
+        name: userName,
+        email: userEmail,
+        profilePictureID: profilePictureID,
+        id: userId,
+      };
+      setIsAuthenticated(true);
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(userDetails));
+      navigate("/dashboard");
+      return;
+    }
   };
 
   return (
