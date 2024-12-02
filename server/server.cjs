@@ -32,7 +32,10 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(
   cors({
-    origin: "https://umbrella-talk-api-zeta.vercel.app",
+    origin: [
+      "https://umbrella-talk-api-zeta.vercel.app",
+      "http://localhost:3000",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,

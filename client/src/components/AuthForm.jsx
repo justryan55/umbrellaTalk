@@ -63,22 +63,26 @@ export default function AuthForm({ action }) {
 
     if (action === "login") {
       const res = await fetch("/api/auth/login", params);
-      if (res.ok) {
-        const { token, userName, userEmail, userId, profilePictureID } =
-          await res.json();
-        const userDetails = {
-          name: userName,
-          email: userEmail,
-          profilePictureID: profilePictureID,
-          id: userId,
-        };
-        setIsAuthenticated(true);
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(userDetails));
-        navigate("/dashboard");
-        return;
-      } else {
-        setError("Incorrect credentials.");
+      try {
+        if (res.ok) {
+          const { token, userName, userEmail, userId, profilePictureID } =
+            await res.json();
+          const userDetails = {
+            name: userName,
+            email: userEmail,
+            profilePictureID: profilePictureID,
+            id: userId,
+          };
+          setIsAuthenticated(true);
+          localStorage.setItem("token", token);
+          localStorage.setItem("user", JSON.stringify(userDetails));
+          navigate("/dashboard");
+          return;
+        } else {
+          setError("Incorrect credentials.");
+        }
+      } catch (err) {
+        console.log(err);
       }
     }
   };
