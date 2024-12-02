@@ -20,32 +20,31 @@ export default function WelcomePageText({ action }) {
       confirmPassword: "",
     };
 
-    const res = await fetch(
-      `api/auth/login`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(guestFormData),
-      },
-      guestFormData
-    );
+    const params = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(guestFormData),
+    };
 
-    if (res.ok) {
-      const { token, userName, userEmail, userId, profilePictureID } =
-        await res.json();
-      const userDetails = {
-        name: userName,
-        email: userEmail,
-        profilePictureID: profilePictureID,
-        id: userId,
-      };
-      setIsAuthenticated(true);
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(userDetails));
-      navigate("/dashboard");
-      return;
+    try {
+      const res = await fetch("/api/auth/login", params);
+
+      if (res.ok) {
+        const { token, userName, userEmail, userId, profilePictureID } =
+          await res.json();
+        const userDetails = {
+          name: userName,
+          email: userEmail,
+          profilePictureID: profilePictureID,
+          id: userId,
+        };
+        setIsAuthenticated(true);
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(userDetails));
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
