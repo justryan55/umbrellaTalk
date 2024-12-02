@@ -16,5 +16,5 @@ Developers
 
 ### Development
 
-- from `/server` run `npm start`
+- from `/server` run `npm run dev`
 - from `/client` run `npm run dev`
