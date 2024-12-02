@@ -63,6 +63,12 @@ export default function WelcomePageText({ action }) {
               <span className="welcome-page-action-link">
                 <Link to="/register">Register</Link>
               </span>
+              <p>
+                Continue as a Guest -
+                <span className="welcome-page-action-link">
+                  <Link onClick={handleGuestClick}> Login</Link>
+                </span>
+              </p>
             </>
           ) : (
             <>
@@ -70,12 +76,6 @@ export default function WelcomePageText({ action }) {
               <span className="welcome-page-action-link">
                 <Link to="/login">Login</Link>
               </span>
-              <p>
-                Continue as a Guest -
-                <span className="welcome-page-action-link">
-                  <Link onClick={handleGuestClick}> Login</Link>
-                </span>
-              </p>
             </>
           )}
         </p>
