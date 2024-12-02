@@ -1,89 +1,97 @@
-import { useNavigate } from 'react-router'
-import LoginRegisterButton from './LoginRegisterButton'
-import { useContext, useState } from 'react'
-import { AuthenticationContext, UserContext } from '../services/AuthContext'
-import PropTypes from "prop-types"
+import { useNavigate } from "react-router";
+import LoginRegisterButton from "./LoginRegisterButton";
+import { useContext, useState } from "react";
+import { AuthenticationContext, UserContext } from "../services/AuthContext";
+import PropTypes from "prop-types";
 
 export default function AuthForm({ action }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [isAuthenticated, setIsAuthenticated] = useContext(AuthenticationContext)
-  const [user, setUser] = useContext(UserContext)
-  const [error, setError] = useState(null)
-
+  const [isAuthenticated, setIsAuthenticated] = useContext(
+    AuthenticationContext
+  );
+  const [user, setUser] = useContext(UserContext);
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const formData = new FormData(e.target)
-    const payload = Object.fromEntries(formData)
+    const formData = new FormData(e.target);
+    const payload = Object.fromEntries(formData);
 
-    setError(null)
+    setError(null);
 
-    if (action === 'register' && payload.password !== payload['confirm-password']) {
-      setError('Passwords do not match.');
+    if (
+      action === "register" &&
+      payload.password !== payload["confirm-password"]
+    ) {
+      setError("Passwords do not match.");
       return;
     }
 
     const params = {
-      method: 'GET',
+      method: "GET",
       headers: new Headers(),
       body: null,
     };
-    
+
     if (payload) {
-      params.method = 'POST';
-      params.headers.set('Content-Type', 'application/json');
+      params.method = "POST";
+      params.headers.set("Content-Type", "application/json");
       params.body = JSON.stringify(payload);
     }
-    
-    if (action === "register"){
+
+    if (action === "register") {
       const res = await fetch("/api/auth/register", params);
-  
-      if(res.ok) {
-        const { token, userName, userEmail, userId, profilePictureID } = await res.json()  
-        const newUser = ({
+
+      if (res.ok) {
+        const { token, userName, userEmail, userId, profilePictureID } =
+          await res.json();
+        const newUser = {
           name: userName,
           email: userEmail,
           profilePictureID: profilePictureID,
-          id: userId, 
-        })
-        setIsAuthenticated(true)
-        localStorage.setItem('token', token)
-        localStorage.setItem('user', JSON.stringify(newUser))
-        navigate('/dashboard')
+          id: userId,
+        };
+        setIsAuthenticated(true);
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(newUser));
+        navigate("/dashboard");
         return;
       }
-    } 
-    
-    if (action === "login"){
-        const res = await fetch("/api/auth/login", params);
-          if (res.ok){
-            const { token, userName, userEmail, userId, profilePictureID } = await res.json()  
-            const userDetails = ({
-              name: userName,
-              email: userEmail,
-              profilePictureID: profilePictureID,
-              id: userId, 
-            })
-            setIsAuthenticated(true)
-            localStorage.setItem('token', token)
-            localStorage.setItem('user', JSON.stringify(userDetails))
-            navigate('/dashboard')
-            return 
-          } else {
-              setError('Incorrect credentials.');
-          }
     }
-  }
+
+    if (action === "login") {
+      const res = await fetch("/api/auth/login", params);
+      if (res.ok) {
+        const { token, userName, userEmail, userId, profilePictureID } =
+          await res.json();
+        const userDetails = {
+          name: userName,
+          email: userEmail,
+          profilePictureID: profilePictureID,
+          id: userId,
+        };
+        setIsAuthenticated(true);
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(userDetails));
+        navigate("/dashboard");
+        return;
+      } else {
+        setError("Incorrect credentials.");
+      }
+    }
+  };
 
   return (
     <div className="auth-form-container">
       <div className="auth-form-content">
-        <form className="auth-form" onSubmit={handleSubmit}> 
-          {action === "register" ? 
+        <form className="auth-form" onSubmit={handleSubmit}>
+          {action === "register" ? (
             <div>
-              <label htmlFor="name" className="auth-form-label">Full Name</label>
+              <label htmlFor="name" className="auth-form-label">
+                Full Name
+              </label>
               <div>
                 <input
                   id="name"
@@ -95,11 +103,14 @@ export default function AuthForm({ action }) {
                 />
               </div>
             </div>
-          : ""
-          }
+          ) : (
+            ""
+          )}
 
           <div>
-            <label htmlFor="email" className="auth-form-label">Email</label>
+            <label htmlFor="email" className="auth-form-label">
+              Email
+            </label>
             <div>
               <input
                 id="email"
@@ -114,13 +125,18 @@ export default function AuthForm({ action }) {
 
           <div>
             <div className="password-container">
-              <label htmlFor="password" className="auth-form-label">Password</label>
-              {action === "login" ? 
+              <label htmlFor="password" className="auth-form-label">
+                Password
+              </label>
+              {action === "login" ? (
                 <div>
-                  <a href="#" className="forgot-password">Forgot password?</a>
+                  <a href="#" className="forgot-password">
+                    Forgot password?
+                  </a>
                 </div>
-              : ""
-              }
+              ) : (
+                ""
+              )}
             </div>
             <div>
               <input
@@ -133,11 +149,13 @@ export default function AuthForm({ action }) {
               />
             </div>
           </div>
-          
-          {action === "register" ? 
+
+          {action === "register" ? (
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="confirm-password" className="auth-form-label">Confirm Password</label>
+                <label htmlFor="confirm-password" className="auth-form-label">
+                  Confirm Password
+                </label>
               </div>
               <div>
                 <input
@@ -149,8 +167,9 @@ export default function AuthForm({ action }) {
                 />
               </div>
             </div>
-          : ""
-          }
+          ) : (
+            ""
+          )}
 
           {error && <p className="error-message">{error}</p>}
 
@@ -160,9 +179,9 @@ export default function AuthForm({ action }) {
         </form>
       </div>
     </div>
-  )
+  );
 }
 
 AuthForm.propTypes = {
-  action: PropTypes.string.isRequired
-}
+  action: PropTypes.string.isRequired,
+};
