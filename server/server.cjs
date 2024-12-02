@@ -109,8 +109,8 @@ app.post(
 
 app.post("/api/auth/login", async (req, res, next) => {
   const { email, password } = req.body;
-
   const user = await User.findOne({ email });
+  console.log(email, password, user);
 
   if (!user) {
     return res.status(401).send("Invalid email");
