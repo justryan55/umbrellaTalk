@@ -7,6 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": "https://umbrella-talk-api-zeta.vercel.app",
+      changeOrigin: true,
     },
     host: true,
     port: 3000,
