@@ -4,8 +4,9 @@
     { "src": "server.cjs", "use": "@vercel/node" },
     { "src": "dist/**", "use": "@vercel/static" }
   ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "server.cjs" },
-    { "src": "/(.*)", "dest": "dist/$1" }
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/server.cjs" },
+    { "source": "/(.*)", "destination": "/dist/$1" },
+    { "source": "/(.*)", "destination": "/dist/index.html" }
   ]
 }
